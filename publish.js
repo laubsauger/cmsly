@@ -12,7 +12,7 @@ fileHelper.createPublishRootFolder(publishTimestamp);
 
 for (var i=0; i<pages.length; i++) {
     try {
-        var pageHtml = pageRenderer('home');
+        var pageHtml = pageRenderer(pages[i]);
         fileHelper.writePageHtmlFile(publishTimestamp, pages[i], pageHtml);
         publishedPages++;
     } catch (e) {
