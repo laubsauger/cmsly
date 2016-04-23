@@ -2,11 +2,15 @@ cms poc
 
 ----
 
+node server
+node publish
+
+----
 todo
-    publishing to output folder
-        build all pages from content folder
-        create folder output/timestamp
+    full publish to output folder
         symlink folder to output/latest
+    
+    page publish to output/timestamp/page folder
+        symlink file to output/latest
         
-        node publish
         node publish home

@@ -3,7 +3,7 @@ var Handlebars = require('handlebars');
 
 //lookup partials for this component type and register them
 function registerComponentPartials(componentType) {
-  var partials = fileHelper.getComponentPartialsFolderIndex(componentType);
+  var partials = fileHelper.getComponentPartialsFileIndex(componentType);
 
   for (var i = 0; i < partials.length; i++) {
     var partialName = partials[i].split(".").slice(0, -1).join(".");
