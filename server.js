@@ -17,16 +17,24 @@ function loadPartialTemplate(name) {
   return fs.readFileSync(__dirname + '/data/templates/partials/' + name + '.html', 'utf-8');
 }
 
-function loadContentJson(path) {
-  return JSON.parse(fs.readFileSync(__dirname + '/data/content/' + path + '/page.json', 'utf-8')).components;
+function getPageJson(path) {
+  return JSON.parse(fs.readFileSync(__dirname + '/data/content/' + path + '/page.json', 'utf-8'));
 }
 
 function loadHeader(path) {
-  return fs.readFileSync(__dirname + '/data/content/' + path + '/header.html', 'utf-8');
+  if (!path) {
+    path = 'header'
+  }
+  
+  return fs.readFileSync(__dirname + '/data/content/' + path + '.html', 'utf-8');
 }
 
 function loadFooter(path) {
-  return fs.readFileSync(__dirname + '/data/content/' + path + '/footer.html', 'utf-8');
+  if (!path) {
+    path = 'footer'
+  }
+  
+  return fs.readFileSync(__dirname + '/data/content/' + path + '.html', 'utf-8');
 }
 
 // compile handlebars templates, map data to compiled template
@@ -59,16 +67,16 @@ function buildComponentHtml(component) {
 
 router.use(function(req, res){
   var page = 'home';
-  var components = loadContentJson(page);
+  var pageJson = getPageJson(page);
   var html = '';
   
-  html += loadHeader(page);
+  html += loadHeader(pageJson.header || '');
     
-  for(var item in components) {
-    html += buildComponentHtml(components[item]);
+  for(var item in pageJson.components) {
+    html += buildComponentHtml(pageJson.components[item]);
   }
 
-  html += loadFooter(page);
+  html += loadFooter(pageJson.footer || '');
 
   res.send(html);
 });

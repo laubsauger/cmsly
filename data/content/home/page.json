@@ -1,4 +1,5 @@
 {
+    "header": "home/header",
 	"components": [
         {
             "type": "slider",
