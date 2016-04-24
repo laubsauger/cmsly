@@ -14,7 +14,6 @@ function registerComponentPartials(componentType) {
   }
 }
 
-//@todo: 
 function extendContentWithBackendData(componentType, content) {
   switch(componentType) {
     case 'productList': 
@@ -24,13 +23,24 @@ function extendContentWithBackendData(componentType, content) {
   }
 }
 
+function containsDynamicContent(contentItems) {
+  var dynamicContentItems = 0;
+  
+  for (var item in contentItems) {
+    dynamicContentItems += Object.keys(contentItems[item]).filter(function(item) { return item.indexOf('_') === 0; }).length;
+  }
+  
+  return dynamicContentItems > 0;
+}
+
 // compile template and map data
 function buildHtml(componentType, template, content) {
   var compiledTemplate = Handlebars.compile(template);
 
-  content = extendContentWithBackendData(componentType, content);
+  if (containsDynamicContent(content.items)) {
+      content = extendContentWithBackendData(componentType, content);
+  }
 
-  // console.log(content);
   return compiledTemplate(content);
 }
 
