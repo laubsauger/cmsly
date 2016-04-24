@@ -1,0 +1,17 @@
+#header {
+    background-color: #ccc;
+}
+
+#logo,
+#nav {
+    padding-left: 1em;
+}
+
+#content {
+    width: 960px;
+    margin: 0 auto;
+}
+
+#footer {
+    background-color: #ccc;
+}
