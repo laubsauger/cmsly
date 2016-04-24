@@ -1,23 +1,6 @@
 {
 	"components": [
         {
-            "type": "slider",
-            "content": {
-                "items": [
-                    {
-                        "title": "Title 1",
-                        "link": "/link1-new",
-                        "image": "image1.png"
-                    },
-                    {
-                        "title": "Title 2",
-                        "link": "/link2",
-                        "image": "image2.png"
-                    }
-                ]
-            }
-        },
-        {
             "type": "productList",
             "content": {
                 "items": [

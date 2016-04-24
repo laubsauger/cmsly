@@ -1,8 +1,9 @@
 var Git = require('nodegit');
-var fileHelper = require('./fileHelper.js');
-var path = require('path');
 var promisify = require('promisify-node');
-var fse = promisify(require('fs-extra'));
+var sys = require('sys')
+var exec = require('child_process').exec;
+
+var fileHelper = require('./fileHelper.js');
 
 function cloneContentRepoToTmp() {
     // Clone a given repository into the `./tmp` folder.
@@ -50,11 +51,7 @@ module.exports = {
             index = indexResult;
         })
         .then(function() {
-           repo.getStatus().then(function(statuses) {
-                statuses.forEach(function(file) {
-                    return index.addByPath(file.path());
-                });
-            });
+            return index.addAll();
         })
         .then(function() {
             return index.write();
@@ -67,17 +64,16 @@ module.exports = {
             return Git.Reference.nameToId(repo, "HEAD");
         })
         .then(function(parent) {
-            var timestamp = Math.floor(Date.now());
+            var timestamp =  Math.floor(Date.now() / 1000);
             var author = Git.Signature.create("author", "author@example.com", timestamp, 0);
-            var committer = Git.Signature.create("committer", "author@example.com", timestamp, 0);
+            var committer = Git.Signature.create("cmsly", "cmsly@example.com", timestamp, 0);
         
             return repo.createCommit("HEAD", author, committer, publishTimestamp, oid, [parent]);
         })
         .done(function(commitId) {
             console.log('# VersionControl: New Commit: ', commitId);
+            
+            exec('cd ../cmsly-test-content && git push origin master', console.log);
         });
-
-
-        //@todo: push
     }
 }
