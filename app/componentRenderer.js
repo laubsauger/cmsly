@@ -1,5 +1,6 @@
 var fileHelper = require('./fileHelper.js');
 var Handlebars = require('handlebars');
+var backendService = require('./backendService.js');
 
 //lookup partials for this component type and register them
 function registerComponentPartials(componentType) {
@@ -13,11 +14,24 @@ function registerComponentPartials(componentType) {
   }
 }
 
+//@todo: 
+function extendContentWithBackendData(componentType, content) {
+  switch(componentType) {
+    case 'productList': 
+        return backendService.getProductsData(content);
+    default: 
+      return content;
+  }
+}
+
 // compile template and map data
-function buildHtml(template, data) {
+function buildHtml(componentType, template, content) {
   var compiledTemplate = Handlebars.compile(template);
 
-  return compiledTemplate(data);
+  content = extendContentWithBackendData(componentType, content);
+
+  // console.log(content);
+  return compiledTemplate(content);
 }
 
 // load component template, compile, return html
@@ -26,7 +40,7 @@ function renderHtml(component) {
   
   registerComponentPartials(component.type);
 
-  return buildHtml(componentTemplate, component.content);
+  return buildHtml(component.type, componentTemplate, component.content);
 }
 
 module.exports = renderHtml;
