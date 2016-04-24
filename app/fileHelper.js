@@ -1,25 +1,25 @@
-var fs = require('fs');
+var fse = require('fs-extra');
 var path = require('path');
 
 function getDirectories(srcpath) {
-    return fs.readdirSync(srcpath).filter(function(file) {
-        return fs.statSync(path.join(srcpath, file)).isDirectory();
+    return fse.readdirSync(srcpath).filter(function(file) {
+        return fse.statSync(path.join(srcpath, file)).isDirectory();
     });
 }
 
 function getFiles(srcpath) {
-    return fs.readdirSync(srcpath).filter(function(file) {
-        return fs.statSync(path.join(srcpath, file)).isFile();
+    return fse.readdirSync(srcpath).filter(function(file) {
+        return fse.statSync(path.join(srcpath, file)).isFile();
     });
 }
         
 module.exports = {
     loadComponentTemplate: function (name) {
-        return fs.readFileSync(__dirname + '/../data/templates/components/' + name + '.html', 'utf-8');
+        return fse.readFileSync(__dirname + '/../data/templates/components/' + name + '.html', 'utf-8');
     },
     
     loadPartialTemplate: function (name) {
-        return fs.readFileSync(__dirname + '/../data/templates/partials/' + name + '.html', 'utf-8');
+        return fse.readFileSync(__dirname + '/../data/templates/partials/' + name + '.html', 'utf-8');
     },
 
     getComponentPartialsFileIndex: function(componentType) {
@@ -27,7 +27,7 @@ module.exports = {
     },
     
     loadPageJson: function (path) {
-        return JSON.parse(fs.readFileSync(__dirname + '/../data/pages/' + path + '/page.json', 'utf-8'));
+        return JSON.parse(fse.readFileSync(__dirname + '/../data/pages/' + path + '/page.json', 'utf-8'));
     },
     
     loadHeader: function (path) {
@@ -35,7 +35,7 @@ module.exports = {
             path = 'header';
         }
         
-        return fs.readFileSync(__dirname + '/../data/pages/' + path + '.html', 'utf-8');
+        return fse.readFileSync(__dirname + '/../data/pages/' + path + '.html', 'utf-8');
     },
     
     loadFooter: function (path) {
@@ -43,7 +43,7 @@ module.exports = {
             path = 'footer';
         }
         
-        return fs.readFileSync(__dirname + '/../data/pages/' + path + '.html', 'utf-8');
+        return fse.readFileSync(__dirname + '/../data/pages/' + path + '.html', 'utf-8');
     },
     
     getPagesFolderIndex: function() {
@@ -53,20 +53,24 @@ module.exports = {
     createPublishRootFolder: function(publishTimestamp) {
         var path = __dirname + '/../output';
         
-        if (!fs.existsSync(path)){
-            fs.mkdirSync(path);
+        if (!fse.existsSync(path)){
+            fse.mkdirSync(path);
         }
         
-        return fs.mkdirSync(path + '/' + publishTimestamp);
+        return fse.mkdirSync(path + '/' + publishTimestamp);
     },
     
     createPublishPageFolder: function(publishTimestamp, page) {
-        return fs.mkdirSync(__dirname + '/../output/' + publishTimestamp + '/' + page);
+        return fse.mkdirSync(__dirname + '/../output/' + publishTimestamp + '/' + page);
     },
     
     writePageHtmlFile: function(publishTimestamp, page, pageHtml) {
         this.createPublishPageFolder(publishTimestamp, page);
         
-        return fs.writeFileSync(__dirname + '/../output/' + publishTimestamp + '/' + page + '/' + 'index.html', pageHtml, 'utf-8');
+        return fse.writeFileSync(__dirname + '/../output/' + publishTimestamp + '/' + page + '/' + 'index.html', pageHtml, 'utf-8');
+    },
+    
+    copyPublishResultToTmp: function(publishTimestamp) {
+        fse.copySync(__dirname + '/../output/' + publishTimestamp, './tmp/');
     }
 };

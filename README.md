@@ -6,6 +6,13 @@ cms poc
 - node publish
 
 ----
+
+**nodegit
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt-get update
+sudo apt-get install libstdc++-4.9-dev
+
+----
 todo
     - full publish to output folder
         symlink folder to output/latest
@@ -18,5 +25,6 @@ todo
     - github for content versioning
         - create version when publishing
         - show diff between versions
+    
     
     

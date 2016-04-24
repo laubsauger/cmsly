@@ -8,9 +8,12 @@
   "dependencies": {
     "async": "~0.2.8",
     "express": "~3.2.4",
+    "fs-extra": "^0.28.0",
     "handlebars": "^4.0.5",
     "html": "0.0.10",
     "lodash": "^4.11.1",
-    "moment": "^2.13.0"
+    "moment": "^2.13.0",
+    "nodegit": "^0.12.2",
+    "promisify-node": "^0.4.0"
   }
 }
