@@ -5,6 +5,8 @@ var exec = require('child_process').exec;
 var path = require('path');
 
 var fileHelper = require('./fileHelper.js');
+var contentRepoPath = '../cmsly-test-content';
+
 
 function execCallback(error, stdout, stderr) { 
     console.log('# VersionControl: Pushing commit');
@@ -19,8 +21,8 @@ function execCallback(error, stdout, stderr) {
 
 function cloneContentRepoToTmp() {
     // Clone a given repository into the `./tmp` folder.
-    console.log('# VersionControl: cloning repo to ../cmsly-test-content')
-    Git.Clone("https://github.com/laubsauger/cmsly-test-content", "../cmsly-test-content")
+    console.log('# VersionControl: cloning repo to ' + contentRepoPath)
+    Git.Clone('https://github.com/laubsauger/cmsly-test-content', contentRepoPath)
 }
 
 
@@ -29,7 +31,7 @@ function commitAddAndPush(publishTimestamp, changeMap) {
     var index;
     var oid;
 
-    Git.Repository.open('../cmsly-test-content/.git')
+    Git.Repository.open(path.resolve(__dirname, '../' + contentRepoPath + '/.git'))
     .then(function(repoResult) {
         repo = repoResult;
         return repo.openIndex();
@@ -61,7 +63,7 @@ function commitAddAndPush(publishTimestamp, changeMap) {
     .done(function(commitId) {
         console.log('# VersionControl: New Commit: ', commitId);
         
-        exec('cd ../cmsly-test-content && git push origin master', execCallback);
+        exec('cd ' + contentRepoPath +  '&& git push origin master', execCallback);
     });
 }
 
@@ -70,7 +72,7 @@ function checkForChanges(publishTimestamp, doneCallback, noOpCallback) {
     var index;
     var oid;
 
-    Git.Repository.open(path.resolve(__dirname, "../../cmsly-test-content/.git"))
+    Git.Repository.open(path.resolve(__dirname, '../' + contentRepoPath + '/.git'))
     .then(function(repo) {
         repo.getStatus().then(function(statuses) {
             var changeMap = [];
@@ -111,7 +113,7 @@ module.exports = {
         cloneContentRepoToTmp();
 
         // overwrite with files from new release
-        fileHelper.copyPublishResult(publishTimestamp, '../cmsly-test-content');
+        fileHelper.copyPublishResult(publishTimestamp, contentRepoPath);
         
         // detect changes and push a commit if there are any
         checkForChanges(publishTimestamp, commitAddAndPush, function(){ console.log('# VersionControl: No changes. Nothing to commit. Done'); });
