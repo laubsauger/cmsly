@@ -28,7 +28,7 @@ for (var i=0; i<pages.length; i++) {
     }
 }
 
-console.log(' - Merge result for publishing job: "' + publishTimestamp + '"');
-versionControl.createNewRelease(publishTimestamp);
-
 console.log('Publishing Job "' + publishTimestamp + '" finished. (Pages: ' + pages.length + ', Published: ' + publishedPages + ', Errors: ' + errors + ')');
+
+console.log('Starting version control for publishing result "' + publishTimestamp + '"');
+versionControl.createNewRelease(publishTimestamp);

@@ -3,7 +3,6 @@ var path = require('path');
 
 var async = require('async');
 var express = require('express');
-var favicon = require('serve-favicon');
 
 var router = express();
 var server = http.createServer(router);

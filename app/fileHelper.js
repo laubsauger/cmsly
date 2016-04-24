@@ -70,7 +70,7 @@ module.exports = {
         return fse.writeFileSync(__dirname + '/../output/' + publishTimestamp + '/' + page + '/' + 'index.html', pageHtml, 'utf-8');
     },
     
-    copyPublishResultToTmp: function(publishTimestamp) {
-        fse.copySync(__dirname + '/../output/' + publishTimestamp, './tmp/');
+    copyPublishResult: function(publishTimestamp, targetPath) {
+        fse.copySync(__dirname + '/../output/' + publishTimestamp, targetPath);
     }
 };
