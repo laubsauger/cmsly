@@ -68,8 +68,8 @@ module.exports = {
         })
         .then(function(parent) {
             var timestamp = Math.floor(Date.now());
-            var author = Git.Signature.create("author", "laubsauger@gmail.com", timestamp, 0);
-            var committer = Git.Signature.create("committer", "laubsauger@gmail.com", timestamp, 0);
+            var author = Git.Signature.create("author", "author@example.com", timestamp, 0);
+            var committer = Git.Signature.create("committer", "author@example.com", timestamp, 0);
         
             return repo.createCommit("HEAD", author, committer, publishTimestamp, oid, [parent]);
         })
