@@ -24,9 +24,15 @@ symlink folder to output/latest
   - symlink file to output/latest
   - node publish home
 
-- github for content versioning
-  - ~~create version when publishing~~
-  - show diff between versions
-
 - input ui created based on page.json and components
   - form inputs
+
+- ui
+  - pages
+    - selecion
+    - creation
+    - page.json live view + edit
+  - publishing 
+    - show file states from git index
+      - click shows diff
+    - publish button
