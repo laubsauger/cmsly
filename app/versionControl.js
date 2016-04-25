@@ -68,16 +68,13 @@ function commitAddAndPush(publishTimestamp, changeMap) {
 }
 
 function checkForChanges(publishTimestamp, doneCallback, noOpCallback) {
-    var repo;
-    var index;
-    var oid;
-
     Git.Repository.open(path.resolve(__dirname, '../' + contentRepoPath + '/.git'))
     .then(function(repo) {
         repo.getStatus().then(function(statuses) {
             var changeMap = [];
             function statusToText(status) {
                 var words = [];
+                
                 if (status.isNew()) { words.push("NEW"); }
                 if (status.isModified()) { words.push("MODIFIED"); }
                 if (status.isTypechange()) { words.push("TYPECHANGE"); }
@@ -116,6 +113,12 @@ module.exports = {
         fileHelper.copyPublishResult(publishTimestamp, contentRepoPath);
         
         // detect changes and push a commit if there are any
-        checkForChanges(publishTimestamp, commitAddAndPush, function(){ console.log('# VersionControl: No changes. Nothing to commit. Done'); });
+        checkForChanges(
+            publishTimestamp, 
+            commitAddAndPush, 
+            function(){ 
+                console.log('# VersionControl: No changes. Nothing to commit. Done'); 
+            }
+        );
     }
 }

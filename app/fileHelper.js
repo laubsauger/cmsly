@@ -72,5 +72,9 @@ module.exports = {
     
     copyPublishResult: function(publishTimestamp, targetPath) {
         fse.copySync(__dirname + '/../output/' + publishTimestamp, targetPath);
+    },
+    
+    loadToolbarTemplate: function() {
+        return fse.readFileSync(__dirname + '/../data/templates/toolbar.html', 'utf-8')
     }
 };

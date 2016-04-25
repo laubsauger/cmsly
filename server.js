@@ -20,12 +20,14 @@ router.get('*', function (req, res) {
     
     if (_.indexOf(fileHelper.getPagesFolderIndex(), page) !== -1) {
         console.log('serving page: ' + page);
-        res.send(pageRenderer('home'));
+        var pageHtmlWithInjectedToolbar = pageRenderer('home', true);
+        res.send(pageHtmlWithInjectedToolbar);
         return;
     }
     
-    console.error('page "' + page + '" does not exist yet');
-    res.send('The page <b>' + req.path + '</b> does not exist yet.');
+    var errorMsg = 'Page "' + page + '" does not exist yet';
+    console.error(errorMsg);
+    res.send(errorMsg);
 });
 
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){

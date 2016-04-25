@@ -19,7 +19,7 @@ console.log(' - Publishing ' + pages.length + ' pages');
 for (var i=0; i<pages.length; i++) {
     try {
         console.log(' -- Publishing page: "' + pages[i]);
-        var pageHtml = pageRenderer(pages[i]);
+        var pageHtml = pageRenderer(pages[i], false);
         fileHelper.writePageHtmlFile(publishTimestamp, pages[i], pageHtml);
         publishedPages++;
     } catch (e) {

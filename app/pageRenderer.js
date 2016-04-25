@@ -1,8 +1,10 @@
-var fileHelper = require('./fileHelper.js');
-var componentRenderer = require('./componentRenderer.js');
 var htmlTidy = require('html');
 
-function renderHtml(page) {
+var fileHelper = require('./fileHelper.js');
+var componentRenderer = require('./componentRenderer.js');
+var toolbarRenderer = require('./toolbarRenderer.js');
+
+function renderHtml(page, injectToolbar) {
     if (!page) {
         console.error('No page provided!');
         return;
@@ -15,6 +17,10 @@ function renderHtml(page) {
 
     for(var item in pageJson.components) {
         html += componentRenderer(pageJson.components[item]);
+    }
+    
+    if (injectToolbar === true) {
+        html += toolbarRenderer(pageJson.components);
     }
     
     html += fileHelper.loadFooter(pageJson.footer || '');
