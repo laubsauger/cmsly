@@ -1,13 +1,20 @@
 <div class="dashboard">
+    
     <h1>Dashboard</h1>
-    <div class="dashboard__pageList">
-        Pages
-        <ul>
-            {{#pages}}
-                <li>
-                    <a href="/{{this}}">{{this}}</a>
-                </li>
-            {{/pages}}
-        </ul>
+    
+    <div class="dashboard__widget dashboard__widget--list">
+        <div class="dashboard__widget__title">
+            Pages
+        </div>
+        <div class="dashboard__widget__content">
+            <ul>
+                {{#pages}}
+                    <li>
+                        <a href="/{{this}}">{{this}}</a>
+                    </li>
+                {{/pages}}
+            </ul>
+        </div>
     </div>
+    
 </div>

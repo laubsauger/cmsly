@@ -19,6 +19,11 @@ Toolbar.prototype.highlightCurrentPageInPageFlyout = function(pageFlyout, pathna
     console.log(pathname);
 };
 
+Toolbar.prototype.removeItem = function(elementId) {
+    var element = document.getElementById(elementId);
+    element.parentNode.removeChild(element);
+};
+
 var cmsToolbar = new Toolbar();
 
 window.onload = function() {
@@ -29,10 +34,9 @@ window.onload = function() {
         window.location.pathname
     );
     
+    // add/remove certain buttons when on dashboard
     if (window.location.pathname === '/') {
-        var diffButton = document.getElementById('toolbar_diff');
-        var jsonButton = document.getElementById('toolbar_json');
-        diffButton.parentNode.removeChild(diffButton);
-        jsonButton.parentNode.removeChild(jsonButton);
+        cmsToolbar.removeItem('toolbar_diff');
+        cmsToolbar.removeItem('toolbar_json');
     }
 }

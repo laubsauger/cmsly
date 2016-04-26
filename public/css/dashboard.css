@@ -1,0 +1,32 @@
+.dashboard {
+    
+}
+
+.dashboard__widget {
+    width: 33%;
+    background-color: #8eb8e1;
+    -webkit-box-shadow: 3px 3px 8px rgba(0, 0, 0, .5);
+    -moz-box-shadow: 3px 3px 8px rgba(0, 0, 0, .5);
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, .5);
+}
+
+.dashboard__widget .dashboard__widget__title {
+    color: #fff;
+    background-color: #2f70b1;
+    padding: 5px 10px;
+}
+
+.dashboard__widget .dashboard__widget__content {
+    padding: 5px 10px;
+}
+
+.dashboard__widget .dashboard__widget__content ul,
+.dashboard__widget .dashboard__widget__content li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard__widget--list {
+    
+}

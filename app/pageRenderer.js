@@ -14,13 +14,18 @@ function renderHtml(page, injectPreviewComponents) {
     var html = '';
 
     html += fileHelper.loadPageTopSection();
-    html += fileHelper.loadContentTopSection(pageJson.header || '');
+    
+    if (pageJson.header !== false) {
+        html += fileHelper.loadContentTopSection(pageJson.header || '');
+    }
 
     for(var item in pageJson.components) {
         html += componentRenderer(pageJson.components[item]);
     }
     
-    html += fileHelper.loadContentBottomSection(pageJson.footer || '');
+    if (pageJson.footer !== false) {
+        html += fileHelper.loadContentBottomSection(pageJson.footer || '');
+    }
 
     if (injectPreviewComponents === true) {
         html += toolbarRenderer();
