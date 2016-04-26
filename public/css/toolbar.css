@@ -31,12 +31,20 @@
     background-color: #4e8fd0;
 }
 
-.toolbar .toolbar__section-publish {
+.toolbar .toolbar__section--dashboard {
+    background-color: #2EAE1E;
+}
+
+.toolbar .toolbar__section--dashboard:hover {
+    background-color: #42dc2e;
+}
+
+.toolbar .toolbar__section--publish {
     background-color: #6650b0;
     font-weight: bold;
 }
 
-.toolbar .toolbar__section-publish:hover {
+.toolbar .toolbar__section--publish:hover {
     background-color: #9534b0;
 }
 

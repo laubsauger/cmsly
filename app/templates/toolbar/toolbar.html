@@ -1,11 +1,18 @@
 <div class="toolbar">
     
+    <div class="toolbar__section toolbar__section--dashboard">
+        <a href="/">
+            <div class="toolbar__item toolbar__button" id="toolbar_dashboard">
+                Dashboard
+            </div>
+        </a>
+    </div>
+    
     <div class="toolbar__section">
         <div class="toolbar__item toolbar__button" id="toolbar_pageSelect">
             Select Page
             <div class="toolbar__flyout">
                 <ul>
-                    <li><a href="/"><b>Dashboard</b></a></li>
                     {{#pages}}
                         <li><a href="/{{this}}">{{this}}</a></li>
                     {{/pages}}
@@ -26,7 +33,7 @@
         </div>
     </div>
 
-    <div class="toolbar__section toolbar__section-publish">
+    <div class="toolbar__section toolbar__section--publish">
         <a href="/publish">
             <div class="toolbar__item toolbar__button">
                 Publish
