@@ -30,22 +30,37 @@ module.exports = {
         return JSON.parse(fse.readFileSync(__dirname + '/../data/pages/' + path + '/page.json', 'utf-8'));
     },
     
-    loadHeader: function (path) {
+    loadContentTopSection: function (path) {
         if (!path) {
-            path = 'header';
+            path = 'content_top';
         }
         
         return fse.readFileSync(__dirname + '/../data/pages/' + path + '.html', 'utf-8');
     },
     
-    loadFooter: function (path) {
+    loadContentBottomSection: function (path) {
         if (!path) {
-            path = 'footer';
+            path = 'content_bottom';
         }
         
         return fse.readFileSync(__dirname + '/../data/pages/' + path + '.html', 'utf-8');
     },
     
+    loadPageTopSection: function () {
+        var path = 'page_top';
+        return fse.readFileSync(__dirname + '/../data/pages/' + path + '.html', 'utf-8');
+    },
+    
+    loadPageBottomSection: function () {
+        var path = 'page_bottom';
+        return fse.readFileSync(__dirname + '/../data/pages/' + path + '.html', 'utf-8');
+    },
+    
+    
+    /**
+     * returns subdirectories of pages directory as array
+     * @returns array
+     */
     getPagesFolderIndex: function() {
         return getDirectories(__dirname + '/../data/pages');
     },
@@ -75,6 +90,10 @@ module.exports = {
     },
     
     loadToolbarTemplate: function() {
-        return fse.readFileSync(__dirname + '/../data/templates/toolbar.html', 'utf-8')
+        return fse.readFileSync(__dirname + '/../app/templates/toolbar/toolbar.html', 'utf-8');
+    },
+    
+    loadDashboardTemplate: function() {
+        return fse.readFileSync(__dirname + '/../app/templates/dashboard.html', 'utf-8');
     }
 };

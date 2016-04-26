@@ -10,17 +10,30 @@ var _ = require('lodash');
 
 //--- app
 var pageRenderer = require('./app/pageRenderer.js');
+var dashboardRenderer = require('./app/dashboardRenderer.js');
+var toolbarRenderer = require('./app/toolbarRenderer.js');
 var fileHelper = require('./app/fileHelper.js');
 
 router.use(express.static('public'));
 
+// route dashboard
+router.get('/', function(req, res) {
+    var html = toolbarRenderer();
+    html += dashboardRenderer();
+    
+    res.send(html);
+    return;
+});
+
+// route content
 router.get('*', function (req, res) {
     console.log(req.path);
     var page = req.path.slice(1); 
     
+    // get page by path
     if (_.indexOf(fileHelper.getPagesFolderIndex(), page) !== -1) {
         console.log('serving page: ' + page);
-        var pageHtmlWithInjectedToolbar = pageRenderer('home', true);
+        var pageHtmlWithInjectedToolbar = pageRenderer(page, true);
         res.send(pageHtmlWithInjectedToolbar);
         return;
     }

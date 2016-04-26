@@ -1,0 +1,105 @@
+/* -- content -------*/
+
+#header {
+    background-color: #ccc;
+}
+
+#logo,
+#nav {
+    padding-left: 1em;
+}
+
+#footer {
+    background-color: #ccc;
+}
+
+/* -- app -----------*/
+.cmsly-toolbar,
+.cmsly-toolbar * {
+    box-sizing: border-box;
+}
+
+.cmsly-toolbar {
+    background-color: #2f70b1;
+}
+
+.cmsly-toolbar .toolbar {
+    color: #fff;
+    font-size: 12px;
+    height: 25px;
+    background-color: #1f4a75;
+}
+
+.cmsly-toolbar .toolbar__section {
+    float: left;
+    max-width: 140px;
+    border-right: 1px solid #7eaddd;
+    background-color: #2f70b1;
+}
+
+.cmsly-toolbar .toolbar__section:hover {
+    background-color: #4e8fd0;
+}
+
+.cmsly-toolbar .toolbar__section-publish {
+    background-color: #6650b0;
+}
+
+.cmsly-toolbar .toolbar__section-publish:hover {
+    background-color: #9534b0;
+}
+
+.cmsly-toolbar .toolbar__item {
+    padding: 5px 10px 5px 10px;
+}
+
+.cmsly-toolbar .toolbar__button {
+    position: relative;
+    height: 100%;
+    cursor: pointer;
+    width: 100%;
+}
+
+.cmsly-toolbar .toolbar__flyout {
+    display: none;
+    position: absolute;
+    margin-top: 5px;
+    left: 0;
+    background-color: #4e8fd0;
+    width: 150px;
+}
+
+.cmsly-toolbar .toolbar__flyout ul,
+.cmsly-toolbar .toolbar__flyout li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cmsly-toolbar .toolbar__flyout ul {
+    margin-left: 5px;
+    margin-top: 5px;
+    border-top: 1px solid #7eaddd;
+    border-left: 1px solid #7eaddd;
+}
+
+.cmsly-toolbar .toolbar__flyout li:hover {
+    background-color: #8eb8e1;
+}
+
+.cmsly-toolbar .toolbar__flyout li {
+    background-color: #2f70b1;
+}
+
+.cmsly-toolbar .toolbar__flyout li a {
+    padding: 5px 5px 5px 10px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: #fff;
+}
+
+.cmsly-toolbar .toolbar__section:hover .toolbar__flyout {
+    display: block;
+}

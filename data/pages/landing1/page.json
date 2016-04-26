@@ -1,4 +1,6 @@
 {
+    "header": false,
+    "footer": false,
 	"components": [
         {
             "type": "productList",

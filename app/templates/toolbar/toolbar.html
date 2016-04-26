@@ -1,0 +1,35 @@
+<div class="toolbar">
+    
+    <div class="toolbar__section">
+        <div class="toolbar__item toolbar__button" id="toolbar_pageSelect">
+            Select Page
+            <div class="toolbar__flyout">
+                <ul>
+                    <li><a href="/"><b>Dashboard</b></a></li>
+                    {{#pages}}
+                        <li><a href="/{{this}}">{{this}}</a></li>
+                    {{/pages}}
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toolbar__section">
+        <div class="toolbar__item toolbar__button">
+            JSON
+        </div>
+    </div>
+    
+    <div class="toolbar__section">
+        <div class="toolbar__item toolbar__button">
+            Diff
+        </div>
+    </div>
+
+    <div class="toolbar__section toolbar__section-publish">
+        <div class="toolbar__item toolbar__button">
+            Publish
+        </div>
+    </div>
+    
+</div>

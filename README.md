@@ -36,3 +36,28 @@ symlink folder to output/latest
     - show file states from git index
       - click shows diff
     - publish button
+
+----
+#### Must have Feature set
+
+- Page types
+  - homepage
+    - bannerSlider (with TabHeadings)
+      - Title
+        - Text 
+      - Image
+        - Url
+        - Text (Alt-Text)
+      - Link
+        - Url
+      - scheduled publishing 
+
+| Page Type | Component Name | Component Item         | Component Fields      |
+|-----------|----------------|------------------------|-----------------------|
+| homepage  | bannerSlider   | Tab-Title              | Text                  |
+|           |                | Banner-Image           | Url (Image 957x260)   |
+|           |                |                        | Text (alt-attr)       |
+|           |                | Link                   | Url (Link)            | 
+|           |                | scheduled publishing   | DateTime              |
+|           |                |                        |                       | 
+|           | teaserBox      | Teaser-Image           | Url (Image 306 × 109) |

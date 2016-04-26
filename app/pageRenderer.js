@@ -4,7 +4,7 @@ var fileHelper = require('./fileHelper.js');
 var componentRenderer = require('./componentRenderer.js');
 var toolbarRenderer = require('./toolbarRenderer.js');
 
-function renderHtml(page, injectToolbar) {
+function renderHtml(page, injectPreviewComponents) {
     if (!page) {
         console.error('No page provided!');
         return;
@@ -13,17 +13,20 @@ function renderHtml(page, injectToolbar) {
     var pageJson = fileHelper.loadPageJson(page);
     var html = '';
 
-    html += fileHelper.loadHeader(pageJson.header || '');
+    html += fileHelper.loadPageTopSection();
+    html += fileHelper.loadContentTopSection(pageJson.header || '');
 
     for(var item in pageJson.components) {
         html += componentRenderer(pageJson.components[item]);
     }
     
-    if (injectToolbar === true) {
-        html += toolbarRenderer(pageJson.components);
+    html += fileHelper.loadContentBottomSection(pageJson.footer || '');
+
+    if (injectPreviewComponents === true) {
+        html += toolbarRenderer();
     }
     
-    html += fileHelper.loadFooter(pageJson.footer || '');
+    html += fileHelper.loadPageBottomSection();
     
     return htmlTidy.prettyPrint(html, {unformatted: []});
 }

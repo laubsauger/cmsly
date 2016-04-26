@@ -15,8 +15,17 @@ Toolbar.prototype.renderToElement = function(targetElement) {
     toolbarTemplate.parentNode.removeChild(toolbarTemplate);
 };
 
+Toolbar.prototype.highlightCurrentPageInPageFlyout = function(pageFlyout, pathname) {
+    // pageFlyout.fin
+};
+
 var cmsToolbar = new Toolbar();
 
 window.onload = function() {
     cmsToolbar.renderToElement(document.querySelector('body'));
+    
+    cmsToolbar.highlightCurrentPageInPageFlyout(
+        document.querySelector('#toolbar_pageSelect .toolbar__flyout'),
+        window.location.pathname
+    );
 }
