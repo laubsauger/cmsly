@@ -28,4 +28,11 @@ window.onload = function() {
         document.querySelector('#toolbar_pageSelect .toolbar__flyout'),
         window.location.pathname
     );
+    
+    if (window.location.pathname === '/') {
+        var diffButton = document.getElementById('toolbar_diff');
+        var jsonButton = document.getElementById('toolbar_json');
+        diffButton.parentNode.removeChild(diffButton);
+        jsonButton.parentNode.removeChild(jsonButton);
+    }
 }
