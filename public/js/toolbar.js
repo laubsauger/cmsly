@@ -16,7 +16,7 @@ Toolbar.prototype.renderToElement = function(targetElement) {
 };
 
 Toolbar.prototype.highlightCurrentPageInPageFlyout = function(pageFlyout, pathname) {
-    // pageFlyout.fin
+    console.log(pathname);
 };
 
 var cmsToolbar = new Toolbar();

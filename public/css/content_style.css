@@ -1,0 +1,14 @@
+/* -- content -------*/
+
+#header {
+    background-color: #ccc;
+}
+
+#logo,
+#nav {
+    padding-left: 1em;
+}
+
+#footer {
+    background-color: #ccc;
+}

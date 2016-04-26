@@ -25,6 +25,28 @@ router.get('/', function(req, res) {
     return;
 });
 
+router.get('/publish', function(req, res) {
+    console.log('Starting publishing job via web')
+    
+    res.writeHead(200, {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Transfer-Encoding': 'chunked',
+        'X-Content-Type-Options': 'nosniff'
+    });
+    
+    res.write('Running command: node ' + path.resolve(__dirname, 'publish.js') + '\n');
+    var exec = require('child_process').exec;
+    var publishProcess = exec('node ' + path.resolve(__dirname, 'publish.js'));
+    
+    publishProcess.stdout.on('data', function(data) {
+        res.write(data.toString() + '\n');
+    });
+    
+    publishProcess.on('exit', function(data) {
+        res.end('Finished\n');
+    });
+});
+
 // route content
 router.get('*', function (req, res) {
     console.log(req.path);

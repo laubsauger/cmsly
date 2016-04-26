@@ -10,8 +10,9 @@ var publishedPages = 0;
 var pages = fileHelper.getPagesFolderIndex();
 var publishTimestamp = moment().format('YYYYMMDD-HHmmss');
 
-console.log('Starting publishing job "' + publishTimestamp + '"');
+console.log('Starting publishing job');
 
+console.log('Creating target directory folder ' + __dirname + '/' + publishTimestamp);
 fileHelper.createPublishRootFolder(publishTimestamp);
 
 console.log(' - Publishing ' + pages.length + ' pages');
