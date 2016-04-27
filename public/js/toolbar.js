@@ -16,6 +16,7 @@ Toolbar.prototype.renderToElement = function(targetElement) {
 };
 
 Toolbar.prototype.highlightCurrentPageInPageFlyout = function(pageFlyout, pathname) {
+    // @todo: implement
     console.log(pathname);
 };
 
@@ -23,6 +24,25 @@ Toolbar.prototype.removeItem = function(elementId) {
     var element = document.getElementById(elementId);
     element.parentNode.removeChild(element);
 };
+
+Toolbar.prototype.addConfirmDialogToButton = function(buttonElement, confirmText) {
+    buttonElement.addEventListener(
+        'click',
+        function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            if(confirm(confirmText)) {
+                if (buttonElement.parentElement.tagName === 'A') {
+                    window.location.href = buttonElement.parentElement.getAttribute('href');
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+    );
+}
 
 var cmsToolbar = new Toolbar();
 
@@ -39,4 +59,9 @@ window.onload = function() {
         cmsToolbar.removeItem('toolbar_diff');
         cmsToolbar.removeItem('toolbar_json');
     }
+    
+    cmsToolbar.addConfirmDialogToButton(
+        document.querySelector('.toolbar__section--publish .toolbar__button'),
+        'Are you sure you want to publish naoh?'
+    );    
 }

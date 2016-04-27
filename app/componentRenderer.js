@@ -34,14 +34,14 @@ function containsDynamicContent(contentItems) {
 }
 
 // compile template and map data
-function buildHtml(componentType, template, content) {
+function buildHtml(componentType, template, componentContentData) {
   var compiledTemplate = Handlebars.compile(template);
 
-  if (containsDynamicContent(content.items)) {
-      content = extendContentWithBackendData(componentType, content);
+  if (containsDynamicContent(componentContentData.items)) {
+      componentContentData = extendContentWithBackendData(componentType, componentContentData);
   }
 
-  return compiledTemplate(content);
+  return compiledTemplate(componentContentData);
 }
 
 // load component template, compile, return html

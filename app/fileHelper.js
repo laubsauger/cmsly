@@ -1,16 +1,32 @@
 var fse = require('fs-extra');
 var path = require('path');
 
+/**
+ * get directories in path, return empty array if none found
+ * @returns array
+ */
 function getDirectories(srcpath) {
-    return fse.readdirSync(srcpath).filter(function(file) {
-        return fse.statSync(path.join(srcpath, file)).isDirectory();
-    });
+    try {
+        return fse.readdirSync(srcpath).filter(function(file) {
+            return fse.statSync(path.join(srcpath, file)).isDirectory();
+        });
+    } catch (e) {
+        return [];
+    }
 }
 
+/**
+ * get files in path, return empty array if none found
+ * @returns array
+ */
 function getFiles(srcpath) {
-    return fse.readdirSync(srcpath).filter(function(file) {
-        return fse.statSync(path.join(srcpath, file)).isFile();
-    });
+    try {
+        return fse.readdirSync(srcpath).filter(function(file) {
+            return fse.statSync(path.join(srcpath, file)).isFile();
+        }); 
+    } catch (e) {
+        return [];
+    }
 }
         
 module.exports = {
@@ -28,6 +44,14 @@ module.exports = {
     
     loadPageJson: function (path) {
         return JSON.parse(fse.readFileSync(__dirname + '/../data/pages/' + path + '/page.json', 'utf-8'));
+    },
+    
+    loadContent: function (path) {
+        if (!path) {
+            path = 'content';
+        }
+        
+        return fse.readFileSync(__dirname + '/../data/pages/' + path + '/content.html', 'utf-8');
     },
     
     loadContentTopSection: function (path) {
