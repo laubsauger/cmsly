@@ -71,7 +71,7 @@ function renderHtml(page, injectPreviewComponents) {
     if (injectPreviewComponents === true) {
         Handlebars.registerHelper("helperMissing", function(context) {
             console.error('Template defines "' + context.name + '", but not provided in context');
-            return '<pre class="cmsly-error">no data for placeholder "' + context.name + '"!</pre>';
+            return '<pre class="cmsly-error">No data for placeholder "' + context.name + '"!</pre>';
         });
     }
     
@@ -85,7 +85,7 @@ function renderHtml(page, injectPreviewComponents) {
     }
         
     if (injectPreviewComponents === true) {
-        html = html.replace('</body>', toolbarRenderer() + '</body>');
+        html = html.replace('</body>', toolbarRenderer(pageJson) + '</body>');
     }
         
     return htmlTidy.prettyPrint(html, {unformatted: []});

@@ -1,4 +1,4 @@
-var http = require('http');https://cms-laubsauger.c9users.io/
+var http = require('http');
 var path = require('path');
 
 var async = require('async');
