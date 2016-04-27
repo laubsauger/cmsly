@@ -27,7 +27,7 @@ function renderInPlaceholderMode(contentHtmlTemplate, pageJson) {
     }
     
     html = replacePlaceholderInContent(html, data);
-    console.log(data);
+
     return html;    
 }
 
@@ -60,6 +60,13 @@ function renderHtml(page, injectPreviewComponents) {
     if (!page) {
         console.error('No page provided!');
         return;
+    }
+    
+    if (injectPreviewComponents === true) {
+        Handlebars.registerHelper("helperMissing", function(context) {
+            console.error('Template defines "' + context.name + '", but not provided in context');
+            return '<pre class="cmsly-error">no data for placeholder "' + context.name + '"!</pre>';
+        });
     }
     
     var pageJson = fileHelper.loadPageJson(page);

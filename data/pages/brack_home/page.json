@@ -4,12 +4,12 @@
     "baseCss": "https://brack.ch/css/brackstore-02e32df4-7a89-48ab-81ee-e6c590c7a63f.css",
 	"components": [
         {
-            "type": "promo_boxes",
             "placeholder": "promo_box_x3_top",
+            "type": "promo_boxes",
             "content": {
                 "items": [
                     {
-                        "title": "Expedition Brack123",
+                        "title": "Expedition Brack",
                         "subtitle": "Gewinnen Sie eine Reise ans Ende der Welt",
                         "image": "//info.pcwebshop.ch/2.0-statisch/toptabs/topbox/topbox-expeditionbrack-agentur.jpg",
                         "link": "https://www.expeditionbrack.ch/",
