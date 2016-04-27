@@ -10,6 +10,9 @@ function replacePlaceholderInContent(contentHtml, data) {
     return compiledTemplate(data);
 }
 
+/**
+ * replace a placeholder in full html page with the respective components
+ */
 function renderInPlaceholderMode(contentHtmlTemplate, pageJson) {
     var html = contentHtmlTemplate;
     var data = {};
@@ -31,6 +34,9 @@ function renderInPlaceholderMode(contentHtmlTemplate, pageJson) {
     return html;    
 }
 
+/**
+ * concat page parts and components
+ */
 function renderInStackingMode(pageJson) {
     var html = '';
     var componentsHtml = '';

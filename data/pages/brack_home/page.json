@@ -4,8 +4,8 @@
     "baseCss": "https://brack.ch/css/brackstore-02e32df4-7a89-48ab-81ee-e6c590c7a63f.css",
 	"components": [
         {
-            "placeholder": "promo_box_x3_top",
-            "type": "promo_boxes",
+            "placeholder": "promoBoxes_top",
+            "type": "promoBoxes",
             "content": {
                 "items": [
                     {
