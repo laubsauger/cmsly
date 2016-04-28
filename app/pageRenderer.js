@@ -1,5 +1,6 @@
 var htmlTidy = require('html');
 var Handlebars = require('handlebars');
+var cheerio = require('cheerio');
 
 var fileHelper = require('./fileHelper.js');
 var componentRenderer = require('./componentRenderer.js');
@@ -62,6 +63,17 @@ function renderInStackingMode(pageJson) {
     return html;
 }
 
+function removeCmslyAttributes(html) {
+    var $ = cheerio.load(html);
+
+    $('*').each(function(index, element) {
+        $(element).removeAttr('data-cmsly-target');
+        $(element).removeClass('cmsly-error');
+    });
+    
+    return $.html();
+}
+
 function renderHtml(page, injectPreviewComponents) {
     if (!page) {
         console.error('No page provided!');
@@ -86,8 +98,10 @@ function renderHtml(page, injectPreviewComponents) {
         
     if (injectPreviewComponents === true) {
         html = html.replace('</body>', toolbarRenderer(pageJson) + '</body>');
+    } else {
+        html = removeCmslyAttributes(html);
     }
-        
+    
     return htmlTidy.prettyPrint(html, {unformatted: []});
 }
 

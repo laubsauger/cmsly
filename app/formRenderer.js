@@ -1,3 +1,5 @@
+var cheerio = require('cheerio');
+
 function renderHtml(pageJson) {
     return renderForm(pageJson);
 }
@@ -16,15 +18,16 @@ function renderPageEditForm(pageJson) {
     var formHtml = '<form class="pageEditForm" id="pageEditForm">'
     
     for (var component in pageJson.components) {
+        var componentType = pageJson.components[component].type;
         formHtml += '<fieldset>';
-        formHtml += '<legend>' + pageJson.components[component].type + '</legend>';
+        formHtml += '<legend>' + componentType + '</legend>';
         
         for (var itemIndex in pageJson.components[component].content.items) {
             formHtml += '<fieldset>';
             formHtml += '<legend>Item #' + itemIndex + '</legend>';
             
             for (var itemField in pageJson.components[component].content.items[itemIndex]) {
-                formHtml += renderFormInput(itemField, pageJson.components[component].content.items[itemIndex][itemField]);
+                formHtml += renderFormInput(componentType, itemIndex, itemField, pageJson.components[component].content.items[itemIndex][itemField]);
             }
             
             formHtml += '</fieldset>';
@@ -38,32 +41,61 @@ function renderPageEditForm(pageJson) {
     return formHtml;
 }
 
-function renderFormInput(type, value) {
-    //@todo: handle this with a bit of brain
-    var disabled = '';
+function renderFormInput(componentType, itemIndex, type, value) {
+    var disabled = false;
     var isDynamicType = type.indexOf('_') === 0;
     
     if (isDynamicType) {
-        type = type.slice(1);
-        disabled = ' disabled="true" ';
+        // type = type.slice(1);
+        disabled = true;
     }
+    
+    var dataComponentSelector = 'data-cmsly-selector="' + componentType + '/' + itemIndex + '/' + type + '"';
+    var inputHtml = '';
+    
+    console.log(dataComponentSelector);
     
     switch(type) {
         case 'title': 
-            return '<label>Title<input type="text" placeholder="title" value="'+value+'"' + disabled + '/></label>';
+            inputHtml = '<label>Title<input type="text" placeholder="title"/></label>';
+            break;
         case 'subtitle': 
-            return '<label>Subtitle<input type="text" placeholder="subtitle" value="'+value+'"' + disabled + '/></label>';
+            inputHtml = '<label>Subtitle<input type="text" placeholder="subtitle"/></label>';
+            break;
         case 'link': 
-            return '<label>Link<input type="text" placeholder="link" value="'+value+'"' + disabled + '/></label>';
+            inputHtml = '<label>Link<input type="text" placeholder="link"/></label>';
+            break;
         case 'sku':
-            return '<label>Sku<input type="text" placeholder="sku" value="'+value+'"' + disabled + '/></label>';
+            inputHtml = '<label>Sku<input type="text" placeholder="sku"/></label>';
+            break;
         case 'image':
-            return '<label>Image<input type="text" placeholder="image" value="'+value+'"' + disabled + '/></label>';
+            inputHtml = '<label>Image<input type="text" placeholder="image"/></label>';
+            break;
         default:
-            return '<div><span class="error">Unknown field type <strong>' + type + '</strong><span></div>';
+            inputHtml = '<div><span class="error">Unknown field type <strong>' + type + '</strong><span></div>';
+            break;
             console.error('Unknown form input!', type);
-            return '';
-    } 
+    }
+    
+    return configureFormInput(inputHtml, value, type, disabled, dataComponentSelector);
+}
+
+function configureFormInput(inputHtml, value, type, isDisabled, dataComponentSelector) {
+   var $ = cheerio.load(inputHtml);
+    
+    if (isDisabled) {
+        $('input').attr('disabled', 'disabled');
+    }
+
+    if (dataComponentSelector) {
+        $('input').attr('data-cmsly-selector', dataComponentSelector);
+    }
+    
+    if (value) {
+        $('input').attr('value', value);
+    }
+    
+    return $.html();
 }
 
 function renderStyleTag() {

@@ -4,7 +4,7 @@
 }
 
 .cmsly-toolbar .pageEditForm {
-    display: none;
+    /*display: none;*/
     width: 300px;
     border-top: 1px solid #7eaddd;
     position: fixed;
@@ -50,11 +50,11 @@
     height: 20px;
     position: relative;
     display: block;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 
 .cmsly-toolbar .pageEditForm fieldset fieldset label:nth-child(2) {
-    margin-top: 4px;
+    margin-top: 5px;
 }
 
 .cmsly-toolbar .pageEditForm input {
@@ -64,7 +64,17 @@
     font-size: 11px;
     width: 85%;
     margin-top: -3px;    
+    background-color: #fff;
+    border-color: #fff;
+    border-style: solid;  
 }
+
+.cmsly-toolbar .pageEditForm input:disabled {
+    background-color: #ccc;
+    border-color: #ccc;
+    border-style: solid;  
+}
+
 
 .cmsly-toolbar .pageEditForm input:focus {
     outline: 2px solid #7eaddd;
