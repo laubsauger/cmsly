@@ -46,7 +46,6 @@ body {
 
 .cmsly-toolbar .toolbar .toolbar__section--publish {
     background-color: #6650b0;
-    font-weight: bold;
 }
 
 .cmsly-toolbar .toolbar .toolbar__section--publish:hover {
@@ -59,13 +58,11 @@ body {
     border-left: 1px solid #7eaddd;
     border-right: none;
     background-color: #6650b0;
-    font-weight: bold;
 }
 
 .cmsly-toolbar .toolbar .toolbar__section--data:hover {
     background-color: #9534b0;
 }
-
 
 .cmsly-toolbar .toolbar .toolbar__item {
     padding: 5px 10px 5px 10px;

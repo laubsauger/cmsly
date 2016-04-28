@@ -48,9 +48,9 @@ router.get('/publish', function(req, res) {
 });
 
 // route content
-router.get('*', function (req, res) {
+router.get('/view/:page', function (req, res) {
     console.log(req.path);
-    var page = req.path.slice(1); 
+    var page = req.params.page; 
     
     // get page by path
     if (_.indexOf(fileHelper.getPagesFolderIndex(), page) !== -1) {
