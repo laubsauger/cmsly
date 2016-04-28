@@ -8,12 +8,11 @@ function renderForm(pageJson) {
     var html = '';
     
     html += renderPageEditForm(pageJson);
-    html += renderStyleTag();
     
     return html;
 }
 
-//@todo: RENDER WITH HANDLEBARS... OBVIOUSLY!!!
+//@todo: RENDER WITH HANDLEBARS... OBVIOUSLY!!!!!
 function renderPageEditForm(pageJson) {
     var formHtml = '<form class="pageEditForm" id="pageEditForm">'
     
@@ -42,68 +41,80 @@ function renderPageEditForm(pageJson) {
 }
 
 function renderFormInput(componentType, itemIndex, type, value) {
-    var disabled = false;
-    var isDynamicType = type.indexOf('_') === 0;
+    var isDynamic = type.indexOf('_') === 0;
+    // if (isDynamic) {
+    //     type = type.slice(1);
+    // }
     
-    if (isDynamicType) {
-        // type = type.slice(1);
-        disabled = true;
-    }
-    
-    var dataComponentSelector = 'data-cmsly-selector="' + componentType + '/' + itemIndex + '/' + type + '"';
+    var dataComponentSelector = componentType + '/' + itemIndex + '/' + type;
     var inputHtml = '';
+    var title = '';
+    var placeholder = '';
     
     console.log(dataComponentSelector);
     
     switch(type) {
-        case 'title': 
-            inputHtml = '<label>Title<input type="text" placeholder="title"/></label>';
+        case 'title':
+            title = 'Title';
+            placeholder = 'Enter title';
+            inputHtml = '<label><input type="text"/></label>';
             break;
         case 'subtitle': 
-            inputHtml = '<label>Subtitle<input type="text" placeholder="subtitle"/></label>';
+            title = 'Title';
+            placeholder = 'Enter subtitle';
+            inputHtml = '<label><input type="text"/></label>';
             break;
         case 'link': 
-            inputHtml = '<label>Link<input type="text" placeholder="link"/></label>';
+            title = 'Link';
+            placeholder = 'Enter link href';
+            inputHtml = '<label><input type="text"/></label>';
             break;
         case 'sku':
-            inputHtml = '<label>Sku<input type="text" placeholder="sku"/></label>';
+            title = 'Sku';
+            placeholder = 'Enter a single sku';
+            inputHtml = '<label><input type="text"/></label>';
             break;
         case 'image':
-            inputHtml = '<label>Image<input type="text" placeholder="image"/></label>';
+            title = 'Image';
+            placeholder = 'Select image';
+            inputHtml = '<label><input type="text"/></label>';
             break;
         default:
-            inputHtml = '<div><span class="error">Unknown field type <strong>' + type + '</strong><span></div>';
-            break;
             console.error('Unknown form input!', type);
+            return '<div><span class="error">Unknown field type <strong>' + type + '</strong><span></div>';
     }
     
-    return configureFormInput(inputHtml, value, type, disabled, dataComponentSelector);
+    return configureFormInput(inputHtml, title, placeholder, value, type, isDynamic, dataComponentSelector);
 }
 
-function configureFormInput(inputHtml, value, type, isDisabled, dataComponentSelector) {
-   var $ = cheerio.load(inputHtml);
+function configureFormInput(inputHtml, title, placeholder, value, type, isDynamic, dataComponentSelector) {
+    var $ = cheerio.load(inputHtml);
+    var input = $('input');
     
-    if (isDisabled) {
-        $('input').attr('disabled', 'disabled');
+    if (title) {
+        if (isDynamic) {
+            title = '{' + title + '}';
+        }
+        input.before(title);
+    }
+    
+    if (placeholder) {
+        input.attr('placeholder', placeholder);
+    }
+    
+    if (isDynamic) {
+        input.attr('disabled', 'disabled');
     }
 
     if (dataComponentSelector) {
-        $('input').attr('data-cmsly-selector', dataComponentSelector);
+        input.attr('data-cmsly-selector', dataComponentSelector);
     }
     
     if (value) {
-        $('input').attr('value', value);
+        input.attr('value', value);
     }
     
     return $.html();
 }
-
-function renderStyleTag() {
-    return '<link type="text/css" rel="stylesheet" href="/css/forms.css">'
-}
-
-// function renderScriptTag() {
-//     return '<script src="/js/toolbar.js"></script>';
-// }
 
 module.exports = renderHtml;

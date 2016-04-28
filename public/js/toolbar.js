@@ -61,7 +61,8 @@ Toolbar.prototype.registerPageDataClickToShowFormEvent = function(buttonElement)
 
 var cmsToolbar = new Toolbar();
 
-window.onload = function() {
+window.addEventListener('load', function() {
+    console.log('toolbar - init');
     cmsToolbar.renderToElement(document.querySelector('body'));
     
     cmsToolbar.highlightCurrentPageInPageFlyout(
@@ -83,4 +84,4 @@ window.onload = function() {
     cmsToolbar.registerPageDataClickToShowFormEvent(
         document.querySelector('.toolbar__section--data .toolbar__button')
     );
-}
+});

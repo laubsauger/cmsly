@@ -33,11 +33,15 @@ function renderToolbar(toolbarTemplate, pageJson) {
 }
 
 function renderStyleTag() {
-    return '<link type="text/css" rel="stylesheet" href="/css/toolbar.css">'
+    var toolbarCss = '<link type="text/css" rel="stylesheet" href="/css/toolbar.css" />';
+    var formsCss = '<link type="text/css" rel="stylesheet" href="/css/forms.css" />';
+    return toolbarCss + formsCss;
 }
 
 function renderScriptTag() {
-    return '<script src="/js/toolbar.js"></script>';
+    var toolbarJs = '<script src="/js/toolbar.js"></script>';
+    var formsJs = '<script src="/js/forms.js"></script>';
+    return toolbarJs + formsJs;
 }
 
 module.exports = renderHtml;
