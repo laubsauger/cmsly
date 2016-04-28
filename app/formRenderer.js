@@ -41,7 +41,8 @@ function renderPageEditForm(pageJson) {
 }
 
 function renderFormInput(componentType, itemIndex, type, value) {
-    var isDynamic = type.indexOf('_') === 0;
+    var callsDynamicData = type.indexOf('#') === 0;
+    var isDynamicData = type.indexOf('_') === 0;
     // if (isDynamic) {
     //     type = type.slice(1);
     // }
@@ -69,7 +70,7 @@ function renderFormInput(componentType, itemIndex, type, value) {
             placeholder = 'Enter link href';
             inputHtml = '<label><input type="text"/></label>';
             break;
-        case 'sku':
+        case '#sku':
             title = 'Sku';
             placeholder = 'Enter a single sku';
             inputHtml = '<label><input type="text"/></label>';
@@ -84,15 +85,17 @@ function renderFormInput(componentType, itemIndex, type, value) {
             return '<div><span class="error">Unknown field type <strong>' + type + '</strong><span></div>';
     }
     
-    return configureFormInput(inputHtml, title, placeholder, value, type, isDynamic, dataComponentSelector);
+    return configureFormInput(inputHtml, title, placeholder, value, type, callsDynamicData, isDynamicData, dataComponentSelector);
 }
 
-function configureFormInput(inputHtml, title, placeholder, value, type, isDynamic, dataComponentSelector) {
+function configureFormInput(inputHtml, title, placeholder, value, type, callsDynamicData, isDynamicData, dataComponentSelector) {
     var $ = cheerio.load(inputHtml);
     var input = $('input');
     
     if (title) {
-        if (isDynamic) {
+        if (callsDynamicData) {
+            title = '[' + title + ']';
+        } else if (isDynamicData) {
             title = '{' + title + '}';
         }
         input.before(title);
@@ -102,11 +105,11 @@ function configureFormInput(inputHtml, title, placeholder, value, type, isDynami
         input.attr('placeholder', placeholder);
     }
     
-    if (isDynamic) {
+    if (isDynamicData) {
         input.attr('disabled', 'disabled');
     }
 
-    if (dataComponentSelector) {
+    if (dataComponentSelector && !callsDynamicData) {
         input.attr('data-cmsly-selector', dataComponentSelector);
     }
     

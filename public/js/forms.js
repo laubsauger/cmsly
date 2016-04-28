@@ -5,13 +5,18 @@ Forms.prototype.registerInputTextChangeEvent = function(pageEditFormElement) {
     pageEditFormElement.addEventListener("keyup", function(e) {
     	if(e.target && e.target.nodeName === 'INPUT' && e.target.getAttribute('type') === 'text') {
     	    var input = e.target;
-    	    console.log(input);
     	    self.updateComponentsWithInputData(input);
     	}
     });
 };
 
 Forms.prototype.updateComponentsWithInputData = function(input) {
+    // is dynamic data resolver -> do that
+    if (!input.hasAttribute('data-cmsly-selector')) {
+        console.log('dynamic data resolver', input);
+        return;
+    }
+    
     var cmslySelector = input.getAttribute('data-cmsly-selector');
     var cmslySelectorSegments = cmslySelector.split('/');
     var componentType = cmslySelectorSegments[0];
@@ -25,6 +30,10 @@ Forms.prototype.updateComponentsWithInputData = function(input) {
 };
 
 Forms.prototype.updateComponent = function(componentElement, componentField, input) {
+    console.log('updating component', {'componentElement': componentElement, 'componentField': componentField, 'value': input.value});
+    
+    //@todo: handling for dynamic fields
+    
     switch (componentField) {
         case 'text':
             componentElement.textContent = input.value;
@@ -46,8 +55,7 @@ var cmslyForms = new Forms();
 
 window.addEventListener('load', function() {
     console.log('forms - init');
-    console.log(document.getElementById('pageEditForm'));
-    
+
     cmslyForms.registerInputTextChangeEvent(
         document.getElementById('pageEditForm'),
         cmslyForms.updateComponentWithInputData
