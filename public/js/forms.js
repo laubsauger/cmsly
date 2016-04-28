@@ -3,8 +3,10 @@ var Forms = function() {};
 Forms.prototype.registerInputTextChangeEvent = function(pageEditFormElement) {
     var self = this;
     pageEditFormElement.addEventListener("keyup", function(e) {
+        console.log('keyup')
     	if(e.target && e.target.nodeName === 'INPUT' && e.target.getAttribute('type') === 'text') {
     	    var input = e.target;
+    	    console.log(input)
     	    self.updateComponentsWithInputData(input);
     	}
     });
@@ -32,21 +34,32 @@ Forms.prototype.updateComponentsWithInputData = function(input) {
 Forms.prototype.updateComponent = function(componentElement, componentField, input) {
     console.log('updating component', {'componentElement': componentElement, 'componentField': componentField, 'value': input.value});
     
+    var componentFieldType = componentField;
     //@todo: handling for dynamic fields
+    if (componentField.indexOf('__') !== -1) {
+        componentFieldType = componentField.split('__')[0];
+    }
     
-    switch (componentField) {
+    console.log(componentFieldType)
+    switch (componentFieldType) {
         case 'text':
             componentElement.textContent = input.value;
             break;
         case 'title':
             componentElement.title = input.value;
             break;
+        case 'bg_image':
+            componentElement.style = 'background-image:url("'+input.value+'");';
+            break;
         case 'image':
-        case 'link':
+        case 'linkHref':
             componentElement.href = input.value;
             break;
+        case 'linkTarget':
+            componentElement.target = input.value;
+            break;
         default:
-            console.error('Unhandled componentField', componentField);
+            console.error('Unhandled componentFieldType', componentFieldType);
             break;
     }
 };

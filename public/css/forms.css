@@ -4,7 +4,7 @@
 }
 
 .cmsly-toolbar .pageEditForm {
-    /*display: none;*/
+    display: none;
     width: 300px;
     border-top: 1px solid #7eaddd;
     position: fixed;

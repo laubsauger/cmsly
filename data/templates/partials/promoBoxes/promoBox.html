@@ -1,8 +1,11 @@
-<div class="promo-box" style="background-image:url({{image}})">
-    <a href="{{link}}" {{#if linkTarget}}target="{{linkTarget}}" {{/if}}>
+<div class="promo-box" style="background-image:url({{bg_image}})" data-cmsly-target="{{componentName}}/{{@index}}/bg_image">
+    <a href="{{linkHref}}" {{#if linkTarget}}target="{{linkTarget}}" {{/if}} data-cmsly-target="{{componentName}}/{{@index}}/linkHref||{{componentName}}/{{@index}}/linkTarget">
         <div class="promo-box__bottom">
             <div class="opacity-box"></div>
-            <div class="text">{{title}}<br><span>{{subtitle}}</span></div>
+            <div class="text">
+                <div data-cmsly-target="{{componentName}}/{{@index}}/text__title">{{text__title}}</div>
+                <span data-cmsly-target="{{componentName}}/{{@index}}/text__subtitle">{{text__subtitle}}</span>
+            </div>
         </div>
     </a>
 </div>

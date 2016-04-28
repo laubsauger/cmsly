@@ -40,44 +40,40 @@ function renderPageEditForm(pageJson) {
     return formHtml;
 }
 
-function renderFormInput(componentType, itemIndex, type, value) {
-    var callsDynamicData = type.indexOf('#') === 0;
-    var isDynamicData = type.indexOf('_') === 0;
-    // if (isDynamic) {
-    //     type = type.slice(1);
-    // }
+function renderFormInput(componentType, itemIndex, inputType, value) {
+    var callsDynamicData = inputType.indexOf('#') === 0;
+    var isDynamicData = inputType.indexOf('_') === 0;
+    var type;
+    var title;
     
-    var dataComponentSelector = componentType + '/' + itemIndex + '/' + type;
+    var dataComponentSelector = componentType + '/' + itemIndex + '/';
+    
+    if (inputType.indexOf('__') !== -1) {
+        title = inputType.split('__')[1];
+        type = inputType.split('__')[0];
+        dataComponentSelector += inputType;
+    } else {
+        dataComponentSelector += inputType;
+        type = inputType;
+        title = inputType;
+    }
+    
+    console.log(type + ' - ' + title);
+
     var inputHtml = '';
-    var title = '';
-    var placeholder = '';
+    var placeholder = 'Enter ' + title;
     
     console.log(dataComponentSelector);
     
     switch(type) {
+        case 'text':
         case 'title':
-            title = 'Title';
-            placeholder = 'Enter title';
-            inputHtml = '<label><input type="text"/></label>';
-            break;
         case 'subtitle': 
-            title = 'Title';
-            placeholder = 'Enter subtitle';
-            inputHtml = '<label><input type="text"/></label>';
-            break;
-        case 'link': 
-            title = 'Link';
-            placeholder = 'Enter link href';
-            inputHtml = '<label><input type="text"/></label>';
-            break;
+        case 'linkHref': 
+        case 'linkTarget': 
         case '#sku':
-            title = 'Sku';
-            placeholder = 'Enter a single sku';
-            inputHtml = '<label><input type="text"/></label>';
-            break;
         case 'image':
-            title = 'Image';
-            placeholder = 'Select image';
+        case 'bg_image':
             inputHtml = '<label><input type="text"/></label>';
             break;
         default:
@@ -85,10 +81,10 @@ function renderFormInput(componentType, itemIndex, type, value) {
             return '<div><span class="error">Unknown field type <strong>' + type + '</strong><span></div>';
     }
     
-    return configureFormInput(inputHtml, title, placeholder, value, type, callsDynamicData, isDynamicData, dataComponentSelector);
+    return configureFormInput(inputHtml, title, type, placeholder, value, callsDynamicData, isDynamicData, dataComponentSelector);
 }
 
-function configureFormInput(inputHtml, title, placeholder, value, type, callsDynamicData, isDynamicData, dataComponentSelector) {
+function configureFormInput(inputHtml, title, type, placeholder, value, callsDynamicData, isDynamicData, dataComponentSelector) {
     var $ = cheerio.load(inputHtml);
     var input = $('input');
     

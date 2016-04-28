@@ -9,22 +9,22 @@
             "content": {
                 "items": [
                     {
-                        "title": "Expedition Brack XXXX",
-                        "subtitle": "Gewinnen Sie eine Reise ans Ende der Welt",
-                        "image": "//info.pcwebshop.ch/2.0-statisch/toptabs/topbox/topbox-expeditionbrack-agentur.jpg",
-                        "link": "https://www.expeditionbrack.ch/",
+                        "text__title": "Expedition Brack XXXX",
+                        "text__subtitle": "Gewinnen Sie eine Reise ans Ende der Welt",
+                        "bg_image": "//info.pcwebshop.ch/2.0-statisch/toptabs/topbox/topbox-expeditionbrack-agentur.jpg",
+                        "linkHref": "https://www.expeditionbrack.ch/",
                         "linkTarget": "_blank"
                     },                    
                     {
                         "title": "Besuchen Sie unseren Musik-Showroom",
                         "subtitle": "Musik zum Anfassen, Instrumente zum Anspielen",
-                        "image": "//info.pcwebshop.ch/2.0-statisch/toptabs/topbox/topbox-showroom-musik.jpg",
+                        "bg_image": "//info.pcwebshop.ch/2.0-statisch/toptabs/topbox/topbox-showroom-musik.jpg",
                         "link": "/kontakt/showroom-musik"
                     },
                     {
                         "title": "Bester Support mit geschultem Personal",
                         "subtitle": "BRACK.CH - Ihr Online-Fachhändler.",
-                        "image": "//info.pcwebshop.ch/2.0-statisch/toptabs/bg_kundenservice.jpg",
+                        "bg_image": "//info.pcwebshop.ch/2.0-statisch/toptabs/bg_kundenservice.jpg",
                         "link": "/kontakt"
                     }
                 ]
