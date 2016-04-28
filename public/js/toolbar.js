@@ -44,6 +44,21 @@ Toolbar.prototype.addConfirmDialogToButton = function(buttonElement, confirmText
     );
 }
 
+Toolbar.prototype.registerPageDataClickToShowFormEvent = function(buttonElement) {
+    buttonElement.addEventListener(
+        'click',
+        function(event) {
+            var form = document.getElementById('pageEditForm');
+            
+            if (form.style.display === 'block') {
+                form.style.display = 'none';
+            } else {
+                form.style.display = 'block';
+            }
+        }
+    );
+}
+
 var cmsToolbar = new Toolbar();
 
 window.onload = function() {
@@ -62,6 +77,10 @@ window.onload = function() {
     
     cmsToolbar.addConfirmDialogToButton(
         document.querySelector('.toolbar__section--publish .toolbar__button'),
-        'Are you sure you want to publish naoh?'
-    );    
+        'Are you sure you want to publish?'
+    );
+    
+    cmsToolbar.registerPageDataClickToShowFormEvent(
+        document.querySelector('.toolbar__section--data .toolbar__button')
+    );
 }

@@ -8,7 +8,6 @@ var router = express();
 var server = http.createServer(router);
 var _ = require('lodash');
 
-//--- app
 var pageRenderer = require('./app/pageRenderer.js');
 var dashboardRenderer = require('./app/dashboardRenderer.js');
 var toolbarRenderer = require('./app/toolbarRenderer.js');
@@ -25,6 +24,7 @@ router.get('/', function(req, res) {
     return;
 });
 
+// route publish
 router.get('/publish', function(req, res) {
     console.log('Starting publishing job via web')
     

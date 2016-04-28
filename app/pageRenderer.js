@@ -70,7 +70,7 @@ function renderHtml(page, injectPreviewComponents) {
     
     if (injectPreviewComponents === true) {
         Handlebars.registerHelper("helperMissing", function(context) {
-            console.error('Template defines "' + context.name + '", but not provided in context');
+            console.error('Template defines "' + context.name + '", but it was not provided in context');
             return '<pre class="cmsly-error">No data for placeholder "' + context.name + '"!</pre>';
         });
     }

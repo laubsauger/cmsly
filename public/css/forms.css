@@ -1,0 +1,71 @@
+.cmsly-toolbar .pageEditForm,
+.cmsly-toolbar .pageEditForm * {
+    box-sizing: border-box;
+}
+
+.cmsly-toolbar .pageEditForm {
+    display: none;
+    width: 300px;
+    border-top: 1px solid #7eaddd;
+    position: fixed;
+    right: 0;
+    top: 25px;
+    z-index: 10000;
+    background-color: #1f4a75;
+    padding: 10px;
+    color: #fff;
+    -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, .5);
+    -moz-box-shadow: 0px 3px 6px rgba(0, 0, 0, .5);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, .5);
+}
+
+.cmsly-toolbar .pageEditForm fieldset {
+    border: 1px solid #7eaddd;
+    background-color: #2f70b1;
+    margin-bottom: 5px;
+}
+
+.cmsly-toolbar .pageEditForm fieldset legend {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.cmsly-toolbar .pageEditForm fieldset fieldset {
+    border: 1px solid #7eaddd;
+    background-color: #1f4a75;
+    padding-top: 7px;
+    font-size: 11px;
+}
+
+.cmsly-toolbar .pageEditForm fieldset fieldset legend {
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.cmsly-toolbar .pageEditForm .error {
+    color: #FFED00;;
+}
+
+.cmsly-toolbar .pageEditForm label {
+    height: 20px;
+    position: relative;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.cmsly-toolbar .pageEditForm fieldset fieldset label:nth-child(2) {
+    margin-top: 4px;
+}
+
+.cmsly-toolbar .pageEditForm input {
+    right: 0;
+    position: absolute;
+    padding: 2px;
+    font-size: 11px;
+    width: 85%;
+    margin-top: -3px;    
+}
+
+.cmsly-toolbar .pageEditForm input:focus {
+    outline: 2px solid #7eaddd;
+}
