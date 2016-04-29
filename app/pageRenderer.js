@@ -70,9 +70,10 @@ function removeCmslyAttributes(html) {
 
     $('*').each(function(index, element) {
         $(element).removeAttr('data-cmsly-target');
+        $(element).removeAttr('data-cmsly-component-root');
+        $(element).removeAttr('data-cmsly-item-root');
+        
         $(element).removeClass('cmsly-error');
-        $(element).removeClass('data-cmsly-component-root');
-        $(element).removeClass('data-cmsly-item-root');
     });
     
     return $.html();
