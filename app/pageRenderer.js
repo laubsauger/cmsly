@@ -103,6 +103,7 @@ function renderHtml(page, injectPreviewComponents) {
     if (injectPreviewComponents === true) {
         html = html.replace('</body>', toolbarRenderer(pageJson) + '</body>');
     } else {
+        // clean up the mess to get publishable html
         html = removeCmslyAttributes(html);
     }
     
