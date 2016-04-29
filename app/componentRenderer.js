@@ -14,34 +14,53 @@ function registerComponentPartials(componentType) {
   }
 }
 
-function extendContentWithBackendData(componentType, content) {
+function extendComponentDataItemFieldWithBackendData(resolverItem, resolverFieldValue, field, componentType) {
   switch(componentType) {
-    case 'productList': 
-        return backendService.getProductsData(content);
-    default: 
-      return content;
-  }
+    case 'productList':
+        return backendService.getProductsData(resolverItem, resolverFieldValue, field);
+    }
 }
 
-function containsDynamicContent(contentItems) {
-  var dynamicContentItems = 0;
-  
-  for (var item in contentItems) {
-    dynamicContentItems += Object.keys(contentItems[item]).filter(function(item) { return item.indexOf('_') === 0; }).length;
-  }
-  
-  return dynamicContentItems > 0;
+function containsDynamicField(contentItem) {
+    return Object.keys(contentItem).filter(function(item) { return item.indexOf('_') === 0; }).length > 0;
 }
+
+function getResolverField(contentItem) {
+    return Object.keys(contentItem).filter(function(item) { return item.indexOf('#') === 0; })[0];
+}
+
 
 // compile template and map data
-function buildHtml(componentType, template, componentContentData) {
+function buildHtml(componentType, template, componentData) {
   var compiledTemplate = Handlebars.compile(template);
 
-  if (containsDynamicContent(componentContentData.items)) {
-      componentContentData = extendContentWithBackendData(componentType, componentContentData);
-  }
+  for (var itemIndex in componentData.items) {
+    if(containsDynamicField(componentData.items[itemIndex])) {
+      var resolverField = getResolverField(componentData.items[itemIndex]);
+      
+      if (!resolverField) {
+        throw 'No resolverItem found for item "' + itemIndex + '" in component "' + componentType + '"';
+      } 
+      
+      for (var field in componentData.items[itemIndex]) {
+        if (field.indexOf('#') === 0) {
+          continue;
+        }
+        
+        // field is manually overwritten
+        if (field.indexOf('_') !== 0) {
+          // duplicate array key with dynamic prefix _ to allow keeping the template untouched when setting dynamic values manually
+          componentData.items[itemIndex]['_' + field] = componentData.items[itemIndex][field];
+          continue;
+        }
 
-  return compiledTemplate(componentContentData);
+        componentData.items[itemIndex][field] = extendComponentDataItemFieldWithBackendData(resolverField, componentData.items[itemIndex][resolverField], field, componentType);
+      }
+    }
+  }
+  
+
+  return compiledTemplate(componentData);
 }
 
 // load component template, compile, return html

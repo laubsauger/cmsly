@@ -1,11 +1,25 @@
 module.exports = {
-    getProductsData: function(content) {
-        for (var i = 0; i < content.items.length; i++) {
-            content.items[i]._image = '/images/productImages/' + content.items[i]['#sku'] + '.jpg';
-            content.items[i]._text__title = 'productTitle_' + content.items[i]['#sku'];
-            content.items[i]._linkHref = '/productpath_' + content.items[i]['#sku'];
+    getProductsData: function(resolverField, resolverFieldValue, fieldName) {
+        console.log(fieldName, resolverField, resolverFieldValue);
+        switch(resolverField) {
+            case '#sku': {
+                return getDataForFieldBySku(resolverFieldValue, fieldName);
+            }
+            default:
+                return 'no data returned from service!';
         }
-        
-        return content;
+    }
+}
+
+function getDataForFieldBySku(sku, fieldName) {
+    switch(fieldName) {
+        case '_text__title':
+            return 'Title for SKU#' + sku;
+        case '_image':
+            return '/images/productImages/' + sku + '.jpg'; 
+        case '_linkHref':
+            return '/productPath_' + sku;
+        default:
+            return '-- Unhandled field to resolve: ' + fieldName;
     }
 }
