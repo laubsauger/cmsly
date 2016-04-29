@@ -61,13 +61,106 @@ Forms.prototype.updateComponent = function(componentElement, componentField, inp
     }
 };
 
+Forms.prototype.registerInputTextFocusEvent = function(pageEditFormElement) {
+    var self = this;
+
+    pageEditFormElement.addEventListener("focus", function(e) {
+    	if(e.target && e.target.nodeName === 'INPUT' && e.target.getAttribute('type') === 'text') {
+    	    var input = e.target;
+	        self.toggleOverlayOnCurrentElement(input, true);
+    	}
+    }, true);
+    
+    pageEditFormElement.addEventListener("blur", function(e) {
+    	if(e.target && e.target.nodeName === 'INPUT' && e.target.getAttribute('type') === 'text') {
+    	    var input = e.target;
+	        self.toggleOverlayOnCurrentElement(input, false);
+    	}
+    }, true);
+
+}
+
+Forms.prototype.toggleOverlayOnCurrentElement = function(input, show) {
+    var overlayClass = 'cmsly-overlay';
+    if (!show) {
+        var overlays = document.querySelectorAll('.' + overlayClass);
+        
+        for(var i=0; i<overlays.length; i++) {
+            overlays[i].remove();
+        }
+    } else {
+        var cmslySelector = input.getAttribute('data-cmsly-selector');
+        var componentDomElements = document.querySelectorAll('[data-cmsly-target*="'+cmslySelector+'"]');
+
+        for(var i=0; i<componentDomElements.length; i++) {
+            
+            var parent = closest(componentDomElements[i], '[data-cmsly-item-root]');
+            console.log(parent);
+            if (parent) {
+                this.createOverlay(componentDomElements[i], overlayClass, false);
+                this.createOverlay(parent, overlayClass, true);
+            } else {
+                this.createOverlay(componentDomElements[i], overlayClass, false);
+            }
+        }
+    }
+}
+
+Forms.prototype.createOverlay = function(componentDomElement, overlayClass, isRootComponent) {
+    var overlay = document.createElement('div');
+    var componentDomDimension = componentDomElement.getBoundingClientRect();
+
+    if (isRootComponent) {
+        overlay.setAttribute('class', overlayClass + ' ' + overlayClass + '-root');
+    } else {
+        overlay.setAttribute('class', overlayClass);
+    }
+
+    overlay.style.top = (window.scrollY + componentDomDimension.top) + 'px';
+    overlay.style.left = (window.scrollX + componentDomDimension.left) + 'px';
+    overlay.style.width = (componentDomDimension.width) + 'px';
+    overlay.style.height = (componentDomDimension.height) + 'px';
+    
+    document.body.appendChild(overlay);
+}
+
+
 var cmslyForms = new Forms();
 
 window.addEventListener('load', function() {
     console.log('forms - init');
+    var formElement = document.getElementById('pageEditForm');
 
     cmslyForms.registerInputTextChangeEvent(
-        document.getElementById('pageEditForm'),
+        formElement,
         cmslyForms.updateComponentWithInputData
     );
+    
+    cmslyForms.registerInputTextFocusEvent(
+        formElement
+    );
 });
+
+function closest(el, selector) {
+    var matchesFn;
+
+    // find vendor prefix
+    ['matches','webkitMatchesSelector','mozMatchesSelector','msMatchesSelector','oMatchesSelector'].some(function(fn) {
+        if (typeof document.body[fn] == 'function') {
+            matchesFn = fn;
+            return true;
+        }
+        return false;
+    })
+
+    // traverse parents
+    while (el!==null) {
+        parent = el.parentElement;
+        if (parent!==null && parent[matchesFn](selector)) {
+            return parent;
+        }
+        el = parent;
+    }
+
+    return null;
+}

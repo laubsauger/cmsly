@@ -17,6 +17,8 @@ cms poc
 
 ----
 #### todo
+- render page in iframe to avoid collision of ui js/css with page ui/css
+
 - full publish to output folder
 symlink folder to output/latest
 

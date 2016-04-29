@@ -79,3 +79,15 @@
 .cmsly-toolbar .pageEditForm input:focus {
     outline: 2px solid #7eaddd;
 }
+
+.cmsly-overlay {
+    border: 2px solid #9534b0;
+    position: absolute;
+    z-index: 10000;
+}
+
+.cmsly-overlay-root {
+    border: 2px solid #E99AFF;
+    position: absolute;
+    z-index: 10000;
+}
