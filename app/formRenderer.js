@@ -74,6 +74,7 @@ function renderFormInput(componentType, itemIndex, inputType, value) {
         case '#sku':
         case 'image':
         case 'bg_image':
+        case 'alt':
         case '_text':
         case '_title':
         case '_subtitle': 
@@ -81,6 +82,7 @@ function renderFormInput(componentType, itemIndex, inputType, value) {
         case '_linkTarget': 
         case '_image':
         case '_bg_image':
+        case '_alt':
             inputHtml = '<label><input type="text"/></label>';
             break;
         default:

@@ -71,6 +71,8 @@ function removeCmslyAttributes(html) {
     $('*').each(function(index, element) {
         $(element).removeAttr('data-cmsly-target');
         $(element).removeClass('cmsly-error');
+        $(element).removeClass('data-cmsly-component-root');
+        $(element).removeClass('data-cmsly-item-root');
     });
     
     return $.html();

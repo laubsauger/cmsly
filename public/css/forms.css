@@ -83,11 +83,17 @@
 .cmsly-overlay {
     border: 2px solid #9534b0;
     position: absolute;
-    z-index: 10000;
+    z-index: 9999;
 }
 
-.cmsly-overlay-root {
-    border: 2px solid #E99AFF;
+.cmsly-overlay__root {
+    border: 2px solid #EAD0F1;
     position: absolute;
-    z-index: 10000;
+    z-index: 9999;
+}
+
+.cmsly-overlay__item__root {
+    border: 2px solid #C681D9;
+    position: absolute;
+    z-index: 9999;
 }

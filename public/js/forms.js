@@ -4,6 +4,7 @@ Forms.prototype.registerInputTextChangeEvent = function(pageEditFormElement) {
     var self = this;
     pageEditFormElement.addEventListener("keyup", function(e) {
     	if(e.target && e.target.nodeName === 'INPUT' && e.target.getAttribute('type') === 'text') {
+    	    console.log(e);
     	    var input = e.target;
     	    self.updateComponentsWithInputData(input);
     	}
@@ -44,6 +45,9 @@ Forms.prototype.updateComponent = function(componentElement, componentField, inp
             break;
         case 'title':
             componentElement.title = input.value;
+            break;
+        case 'alt':
+            componentElement.alt = input.value;
             break;
         case 'bg_image':
             componentElement.style = 'background-image:url("'+input.value+'");';
@@ -91,27 +95,32 @@ Forms.prototype.toggleOverlayOnCurrentElement = function(input, show) {
     } else {
         var cmslySelector = input.getAttribute('data-cmsly-selector');
         var componentDomElements = document.querySelectorAll('[data-cmsly-target*="'+cmslySelector+'"]');
-
-        for(var i=0; i<componentDomElements.length; i++) {
+        
+        for(var j=0; j<componentDomElements.length; j++) {
+            var rootComponent = closest(componentDomElements[j], '[data-cmsly-component-root]');
+            var parent = closest(componentDomElements[j], '[data-cmsly-item-root]');
             
-            var parent = closest(componentDomElements[i], '[data-cmsly-item-root]');
-            console.log(parent);
             if (parent) {
-                this.createOverlay(componentDomElements[i], overlayClass, false);
-                this.createOverlay(parent, overlayClass, true);
-            } else {
-                this.createOverlay(componentDomElements[i], overlayClass, false);
+                this.createOverlay(parent, overlayClass, true, false);
             }
+            
+            if(rootComponent) {
+                this.createOverlay(rootComponent, overlayClass, false, true);
+            }
+            
+            this.createOverlay(componentDomElements[j], overlayClass, false, false);
         }
     }
 }
 
-Forms.prototype.createOverlay = function(componentDomElement, overlayClass, isRootComponent) {
+Forms.prototype.createOverlay = function(componentDomElement, overlayClass, isItemRoot, isComponentRoot) {
     var overlay = document.createElement('div');
     var componentDomDimension = componentDomElement.getBoundingClientRect();
 
-    if (isRootComponent) {
-        overlay.setAttribute('class', overlayClass + ' ' + overlayClass + '-root');
+    if (isItemRoot) {
+        overlay.setAttribute('class', overlayClass + ' ' + overlayClass + '__item__root');
+    } else if (isComponentRoot) {
+        overlay.setAttribute('class', overlayClass + ' ' + overlayClass + '__root');
     } else {
         overlay.setAttribute('class', overlayClass);
     }
