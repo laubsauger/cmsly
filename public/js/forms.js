@@ -3,10 +3,8 @@ var Forms = function() {};
 Forms.prototype.registerInputTextChangeEvent = function(pageEditFormElement) {
     var self = this;
     pageEditFormElement.addEventListener("keyup", function(e) {
-        console.log('keyup')
     	if(e.target && e.target.nodeName === 'INPUT' && e.target.getAttribute('type') === 'text') {
     	    var input = e.target;
-    	    console.log(input)
     	    self.updateComponentsWithInputData(input);
     	}
     });
@@ -40,7 +38,6 @@ Forms.prototype.updateComponent = function(componentElement, componentField, inp
         componentFieldType = componentField.split('__')[0];
     }
     
-    console.log(componentFieldType)
     switch (componentFieldType) {
         case 'text':
             componentElement.textContent = input.value;

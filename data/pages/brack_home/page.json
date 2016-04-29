@@ -1,7 +1,7 @@
 {
     "placeholderMode": true,
-    "baseJs": "https://brack.ch/js/brackstore-02e32df4-7a89-48ab-81ee-e6c590c7a63f.js",
-    "baseCss": "https://brack.ch/css/brackstore-02e32df4-7a89-48ab-81ee-e6c590c7a63f.css",
+    "baseJs": "https://www.brack.ch/js/brackstore-24005155-ee4a-4df1-8bf3-bc6070f71554.js",
+    "baseCss": "https://www.brack.ch/css/brackstore-24005155-ee4a-4df1-8bf3-bc6070f71554.css",
 	"components": [
         {
             "placeholder": "promoBoxes_top",
@@ -16,16 +16,16 @@
                         "linkTarget": "_blank"
                     },                    
                     {
-                        "title": "Besuchen Sie unseren Musik-Showroom",
-                        "subtitle": "Musik zum Anfassen, Instrumente zum Anspielen",
+                        "text__title": "Besuchen Sie unseren Musik-Showroom",
+                        "text__subtitle": "Musik zum Anfassen, Instrumente zum Anspielen",
                         "bg_image": "//info.pcwebshop.ch/2.0-statisch/toptabs/topbox/topbox-showroom-musik.jpg",
-                        "link": "/kontakt/showroom-musik"
+                        "linkHref": "/kontakt/showroom-musik"
                     },
                     {
-                        "title": "Bester Support mit geschultem Personal",
-                        "subtitle": "BRACK.CH - Ihr Online-Fachhändler.",
+                        "text__title": "Bester Support mit geschultem Personal",
+                        "text__subtitle": "BRACK.CH - Ihr Online-Fachhändler.",
                         "bg_image": "//info.pcwebshop.ch/2.0-statisch/toptabs/bg_kundenservice.jpg",
-                        "link": "/kontakt"
+                        "linkHref": "/kontakt"
                     }
                 ]
             }

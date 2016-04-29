@@ -8,15 +8,15 @@
                 "items": [
                     {
                         "#sku": "1503",
-                        "_title": "#",
+                        "_text__title": "#",
                         "_image": "#",
-                        "_link": "#"
+                        "_linkHref": "#"
                     },
                     {
                         "#sku": "225500",
-                        "_title": "#",
+                        "_text__title": "#",
                         "_image": "#",
-                        "_link": "#"
+                        "_linkHref": "#"
                     }
                 ]
             }

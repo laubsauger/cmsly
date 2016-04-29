@@ -6,12 +6,12 @@
                 "items": [
                     {
                         "title": "Title 1121231231233123",
-                        "link": "/link1-new",
+                        "linkHref": "/link1-new",
                         "image": "image112312312.png"
                     },
                     {
                         "title": "Title 2",
-                        "link": "/link2",
+                        "linkHref": "/link2",
                         "image": "image2.png"
                     }
                 ]
@@ -23,15 +23,15 @@
                 "items": [
                     {
                         "#sku": "1503",
-                        "_title": "#",
+                        "_text__title": "#",
                         "_image": "#",
-                        "_link": "#"
+                        "_linkHref": "#"
                     },
                     {
                         "#sku": "225500",
-                        "_title": "#",
+                        "_text__title": "#",
                         "_image": "#",
-                        "_link": "#"
+                        "_linkHref": "#"
                     }
                 ]
             }

@@ -74,6 +74,7 @@ window.addEventListener('load', function() {
     if (window.location.pathname === '/') {
         cmsToolbar.removeItem('toolbar_diff');
         cmsToolbar.removeItem('toolbar_json');
+        cmsToolbar.removeItem('toolbar_data');
     }
     
     cmsToolbar.addConfirmDialogToButton(

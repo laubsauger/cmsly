@@ -58,12 +58,12 @@ function renderFormInput(componentType, itemIndex, inputType, value) {
         title = inputType;
     }
     
-    console.log(type + ' - ' + title);
+    // console.log(type + ' - ' + title);
 
     var inputHtml = '';
     var placeholder = 'Enter ' + title;
     
-    console.log(dataComponentSelector);
+    // console.log(dataComponentSelector);
     
     switch(type) {
         case 'text':
@@ -74,6 +74,13 @@ function renderFormInput(componentType, itemIndex, inputType, value) {
         case '#sku':
         case 'image':
         case 'bg_image':
+        case '_text':
+        case '_title':
+        case '_subtitle': 
+        case '_linkHref': 
+        case '_linkTarget': 
+        case '_image':
+        case '_bg_image':
             inputHtml = '<label><input type="text"/></label>';
             break;
         default:

@@ -13,6 +13,7 @@ function replacePlaceholderInContent(contentHtml, data) {
 
 /**
  * replace a placeholder in full html page with the respective components
+ * placeholder mode
  */
 function renderInPlaceholderMode(contentHtmlTemplate, pageJson) {
     var html = contentHtmlTemplate;
@@ -37,6 +38,7 @@ function renderInPlaceholderMode(contentHtmlTemplate, pageJson) {
 
 /**
  * concat page parts and components
+ * default rendering mode
  */
 function renderInStackingMode(pageJson) {
     var html = '';
@@ -82,7 +84,7 @@ function renderHtml(page, injectPreviewComponents) {
     
     if (injectPreviewComponents === true) {
         Handlebars.registerHelper("helperMissing", function(context) {
-            console.error('Template defines "' + context.name + '", but it was not provided in context');
+            console.error('Template "' + ('' || '') + '" defines "' + context.name + '", but it was not provided in context', context.data._parent.root.items);
             return '<pre class="cmsly-error">No data for placeholder "' + context.name + '"!</pre>';
         });
     }
