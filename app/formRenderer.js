@@ -14,7 +14,7 @@ function renderForm(pageJson) {
 
 //@todo: RENDER WITH HANDLEBARS... OBVIOUSLY!!!!!
 function renderPageEditForm(pageJson) {
-    var formHtml = '<form class="pageEditForm" id="pageEditForm">'
+    var formHtml = '<form class="pageEditForm" id="pageEditForm">';
     
     for (var component in pageJson.components) {
         var componentType = pageJson.components[component].type;
@@ -35,7 +35,9 @@ function renderPageEditForm(pageJson) {
         formHtml += '</fieldSet>';
     }
     
-    formHtml += '</form>'
+    formHtml += '<button id="pageEditFormSaveButton">Save</button>';
+    
+    formHtml += '</form>';
     
     return formHtml;
 }
@@ -46,14 +48,12 @@ function renderFormInput(componentType, itemIndex, inputType, value) {
     var type;
     var title;
     
-    var dataComponentSelector = componentType + '/' + itemIndex + '/';
+    var dataComponentSelector = componentType + '/' + itemIndex + '/' + inputType;
     
     if (inputType.indexOf('__') !== -1) {
         title = inputType.split('__')[1];
         type = inputType.split('__')[0];
-        dataComponentSelector += inputType;
     } else {
-        dataComponentSelector += inputType;
         type = inputType;
         title = inputType;
     }
@@ -62,8 +62,6 @@ function renderFormInput(componentType, itemIndex, inputType, value) {
 
     var inputHtml = '';
     var placeholder = 'Enter ' + title;
-    
-    // console.log(dataComponentSelector);
     
     switch(type) {
         case 'text':
@@ -83,7 +81,7 @@ function renderFormInput(componentType, itemIndex, inputType, value) {
         case '_image':
         case '_bg_image':
         case '_alt':
-            inputHtml = '<label><input type="text"/></label>';
+            inputHtml = '<label><input type="text" name="' + dataComponentSelector + '"/></label>';
             break;
         default:
             console.error('Unknown form input!', type);

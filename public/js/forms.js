@@ -79,7 +79,56 @@ Forms.prototype.registerInputTextFocusEvent = function(pageEditFormElement) {
 	        self.toggleOverlayOnCurrentElement(input, false);
     	}
     }, true);
-}
+};
+
+Forms.prototype.registerSaveButtonClickEvent = function(pageEditFormElement, buttonElement) {
+    var self = this;
+
+    buttonElement.addEventListener("click", function(e) {
+        e.preventDefault();
+        self.sendFormData(pageEditFormElement);
+    });
+};
+
+Forms.prototype.sendFormData = function(pageEditFormElement) {
+    console.log('parsing form');
+    var formData = this.parseFormDataToJson(pageEditFormElement);
+
+    console.log('sending data');
+    console.log(formData);
+};
+
+Forms.prototype.parseFormDataToJson = function(pageEditFormElement) {
+    var data = {};
+
+    for (var i=0; i < pageEditFormElement.elements.length; i++) {
+        var element = pageEditFormElement.elements[i];
+
+        if (!element.hasAttribute('name')) {
+            continue;
+        }
+        
+        var keyPath = element.getAttribute('name').split('/');
+        
+        if (typeof data[keyPath[0]] === "undefined") {
+            data[keyPath[0]] = [];
+        }
+        
+        if (typeof data[keyPath[0]][keyPath[1]] === "undefined") {
+            data[keyPath[0]][keyPath[1]] = {};
+        }
+
+        //@todo: handle manual overwriting 
+        // don't save dynamically resolved values
+        if (keyPath[2].indexOf('_') === 0) {
+            data[keyPath[0]][keyPath[1]][keyPath[2]] = null;
+        } else {
+            data[keyPath[0]][keyPath[1]][keyPath[2]] = element.value;
+        }
+    }
+    
+    return data;
+};
 
 Forms.prototype.toggleOverlayOnCurrentElement = function(input, show) {
     var overlayClass = 'cmsly-overlay';
@@ -132,10 +181,11 @@ Forms.prototype.createOverlay = function(componentDomElement, overlayClass, isIt
 }
 
 
-var cmslyForms = new Forms();
+
 
 window.addEventListener('load', function() {
     console.log('forms - init');
+    var cmslyForms = new Forms();
     var formElement = document.getElementById('pageEditForm');
 
     cmslyForms.registerInputTextChangeEvent(
@@ -145,6 +195,11 @@ window.addEventListener('load', function() {
     
     cmslyForms.registerInputTextFocusEvent(
         formElement
+    );
+    
+    cmslyForms.registerSaveButtonClickEvent(
+        formElement,
+        document.getElementById('pageEditFormSaveButton')
     );
 });
 

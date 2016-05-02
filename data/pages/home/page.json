@@ -31,7 +31,7 @@
                     },
                     {
                         "#sku": "225500",
-                        "_text__title": "123",
+                        "_text__title": null,
                         "_image": null,
                         "_linkHref": null
                     }
