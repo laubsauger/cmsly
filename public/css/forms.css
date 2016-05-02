@@ -84,6 +84,7 @@
     border: 2px solid #9534b0;
     position: absolute;
     z-index: 9999;
+    pointer-events: none;
 }
 
 .cmsly-overlay__root {

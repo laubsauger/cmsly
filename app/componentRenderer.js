@@ -29,7 +29,6 @@ function getResolverField(contentItem) {
     return Object.keys(contentItem).filter(function(item) { return item.indexOf('#') === 0; })[0];
 }
 
-
 // compile template and map data
 function buildHtml(componentType, template, componentData) {
   var compiledTemplate = Handlebars.compile(template);
@@ -43,23 +42,23 @@ function buildHtml(componentType, template, componentData) {
       } 
       
       for (var field in componentData.items[itemIndex]) {
+        // resolver items are not handled in the template
         if (field.indexOf('#') === 0) {
           continue;
         }
-        
-        // field is manually overwritten
-        if (field.indexOf('_') !== 0) {
-          // duplicate array key with dynamic prefix _ to allow keeping the template untouched when setting dynamic values manually
-          componentData.items[itemIndex]['_' + field] = componentData.items[itemIndex][field];
-          continue;
-        }
 
-        componentData.items[itemIndex][field] = extendComponentDataItemFieldWithBackendData(resolverField, componentData.items[itemIndex][resolverField], field, componentType);
+        // duplicate array key with dynamic prefix _ to allow keeping the template untouched when overwriting dynamic values manually
+        if (field.indexOf('_') === 0) {
+          if (componentData.items[itemIndex][field] !== null) {
+            continue;  
+          }
+          
+          componentData.items[itemIndex][field] = extendComponentDataItemFieldWithBackendData(resolverField, componentData.items[itemIndex][resolverField], field, componentType);
+        }
       }
     }
   }
   
-
   return compiledTemplate(componentData);
 }
 

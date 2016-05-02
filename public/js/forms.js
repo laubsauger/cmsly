@@ -4,7 +4,6 @@ Forms.prototype.registerInputTextChangeEvent = function(pageEditFormElement) {
     var self = this;
     pageEditFormElement.addEventListener("keyup", function(e) {
     	if(e.target && e.target.nodeName === 'INPUT' && e.target.getAttribute('type') === 'text') {
-    	    console.log(e);
     	    var input = e.target;
     	    self.updateComponentsWithInputData(input);
     	}
@@ -34,7 +33,6 @@ Forms.prototype.updateComponent = function(componentElement, componentField, inp
     console.log('updating component', {'componentElement': componentElement, 'componentField': componentField, 'value': input.value});
     
     var componentFieldType = componentField;
-    //@todo: handling for dynamic fields
     if (componentField.indexOf('__') !== -1) {
         componentFieldType = componentField.split('__')[0];
     }
@@ -81,11 +79,11 @@ Forms.prototype.registerInputTextFocusEvent = function(pageEditFormElement) {
 	        self.toggleOverlayOnCurrentElement(input, false);
     	}
     }, true);
-
 }
 
 Forms.prototype.toggleOverlayOnCurrentElement = function(input, show) {
     var overlayClass = 'cmsly-overlay';
+    
     if (!show) {
         var overlays = document.querySelectorAll('.' + overlayClass);
         

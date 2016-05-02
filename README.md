@@ -13,7 +13,7 @@ cms poc
 
 ***
 ### lessons learned
-providing a preview with live editing via client side JS is pain.
+providing a preview with live editing via client side JS based on content that was rendered on the backend is pain.
 
 ugly shit that happens:
 - textContent can't be properly replaced without killing the rest of innerHTML
@@ -49,40 +49,9 @@ symlink folder to output/latest
     - show diff against editing base, ask for confirmation
     - add, commit, merge
 
-- input ui created based on page.json and components
-  - form inputs
-
 - ui
   - pages
-    - selecion
     - creation
-    - page.json live view + edit
   - publishing 
     - show file states from git index
       - click shows diff
-    - publish button
-
-***
-#### Must have Feature set
-
-- Page types
-  - homepage
-    - bannerSlider (with TabHeadings)
-      - Title
-        - Text 
-      - Image
-        - Url
-        - Text (Alt-Text)
-      - Link
-        - Url
-      - scheduled publishing 
-
-| Page Type | Component Name | Component Item         | Component Fields      |
-|-----------|----------------|------------------------|-----------------------|
-| homepage  | bannerSlider   | Tab-Title              | Text                  |
-|           |                | Banner-Image           | Url (Image 957x260)   |
-|           |                |                        | Text (alt-attr)       |
-|           |                | Link                   | Url (Link)            | 
-|           |                | scheduled publishing   | DateTime              |
-|           |                |                        |                       | 
-|           | teaserBox      | Teaser-Image           | Url (Image 306 × 109) |

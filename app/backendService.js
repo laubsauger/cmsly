@@ -1,6 +1,6 @@
 module.exports = {
     getProductsData: function(resolverField, resolverFieldValue, fieldName) {
-        console.log(fieldName, resolverField, resolverFieldValue);
+        // console.log(fieldName, resolverField, resolverFieldValue);
         switch(resolverField) {
             case '#sku': {
                 return getDataForFieldBySku(resolverFieldValue, fieldName);
@@ -20,6 +20,6 @@ function getDataForFieldBySku(sku, fieldName) {
         case '_linkHref':
             return '/productPath_' + sku;
         default:
-            return '-- Unhandled field to resolve: ' + fieldName;
+            return 'backendService: Unhandled field: ' + fieldName;
     }
 }
